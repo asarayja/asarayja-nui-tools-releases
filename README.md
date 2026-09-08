@@ -30,6 +30,10 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
   Aider or Qwen Code; plus Ollama / Anthropic / OpenAI / Gemini over API. The NUI rules, the open file,
   the scene on screen and the page's errors travel with every request.
 - **Git** – status, commit (AI-written message), push, create the repo on GitHub, GitHub login.
+- **Log file** – everything on the Log tab is also written to disk (`~/.config/asarayja-nui-tools/logs/` on Linux,
+  `%APPDATA%\asarayja-nui-tools\logs\` on Windows; one file a day, a week kept) with version, platform, the open
+  resource and the last scene. A crash leaves its stack there; a menu view that dies is reloaded with the reason logged;
+  the next start says the last run did not end cleanly, with buttons to copy the last 200 lines and open the folder.
 - **Rules** – `rules/nui-rules.md`: the focus/open-close contract, no blocking dialogs, CSS that
   survives the transparent CEF surface, callbacks, locales, LB Phone, NPWD, clothing menus.
 - App language: English by default; Norwegian, Swedish, Danish, German in Settings. Dark/light.
