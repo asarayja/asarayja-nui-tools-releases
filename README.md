@@ -21,8 +21,10 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
 - **New script** – templates with locales (no/en/sv/da/de), `Config.Locale`, English comments:
   NUI menu, Node-built NUI (Vite + React), LB Phone app, NPWD app (the Qbox default phone),
   clothing / barber / tattoo menu (plain or React), no-NUI.
-- **AI** – a live conversation with Claude Code (or Codex/Gemini) inside the resource, with the NUI
-  rules as system prompt, the open file, the scene on screen and the page's errors.
+- **AI** – a live conversation with Claude Code inside the resource (permission questions answered in
+  the chat), or one-shot turns with Codex, Gemini CLI, GitHub Copilot CLI, Cline, Blackbox AI, OpenCode,
+  Aider or Qwen Code; plus Ollama / Anthropic / OpenAI / Gemini over API. The NUI rules, the open file,
+  the scene on screen and the page's errors travel with every request.
 - **Git** – status, commit (AI-written message), push, create the repo on GitHub, GitHub login.
 - **Rules** – `rules/nui-rules.md`: the focus/open-close contract, no blocking dialogs, CSS that
   survives the transparent CEF surface, callbacks, locales, LB Phone, NPWD, clothing menus.
@@ -38,7 +40,9 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
 - **Windows:** run the portable `.exe`, or the setup installer. SmartScreen warns the first time
   (the build is not signed yet) – choose "Run anyway".
 - For the AI tab, install the CLI you want and log in once: [Claude Code](https://docs.anthropic.com/claude-code)
-  (`claude`), Codex (`codex`) or Gemini CLI (`gemini`). For the Git tab: `git` and [`gh`](https://cli.github.com).
+  (`claude`), Codex (`codex`), Gemini CLI (`gemini`), GitHub Copilot CLI (`copilot`), Cline (`cline`),
+  Blackbox (`blackbox`), OpenCode (`opencode`), Aider (`aider`) or Qwen Code (`qwen`). The command line each
+  one is run with is editable under ⚙. For the Git tab: `git` and [`gh`](https://cli.github.com).
 
 ## Recorder
 
