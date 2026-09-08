@@ -32,6 +32,9 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
   Aider or Qwen Code; plus Ollama / Anthropic / OpenAI / Gemini over API. The NUI rules, the open file,
   the scene on screen and the page's errors travel with every request.
 - **Git** – status, commit (AI-written message), push, create the repo on GitHub, GitHub login.
+- **Updates** – the app asks this repo's releases for a newer version at start and shows a bar. AppImage swaps itself
+  and restarts; the Windows setup downloads and runs the installer silently; portable exe and .deb are downloaded to
+  Downloads. Skip a version, or turn the check off under ⚙.
 - **Log file** – everything on the Log tab is also written to disk (`~/.config/asarayja-nui-tools/logs/` on Linux,
   `%APPDATA%\asarayja-nui-tools\logs\` on Windows; one file a day, a week kept) with version, platform, the open
   resource and the last scene. A crash leaves its stack there; a menu view that dies is reloaded with the reason logged;
