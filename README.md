@@ -26,6 +26,8 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
   NUI menu, Node-built NUI (Vite + React), LB Phone app, NPWD app (the Qbox default phone),
   clothing / barber / tattoo menu (plain or React), no-NUI.
 - **AI** – a live conversation with Claude Code inside the resource (permission questions answered in
+  the chat; `/model sonnet|opus|haiku` or the Model field under ⚙ (`Ctrl+,`) picks the model, a running conversation
+  continues on the new one; the other CLIs get their `-m`/`--model` the same way);
   the chat), or one-shot turns with Codex, Gemini CLI, GitHub Copilot CLI, Cline, Blackbox AI, OpenCode,
   Aider or Qwen Code; plus Ollama / Anthropic / OpenAI / Gemini over API. The NUI rules, the open file,
   the scene on screen and the page's errors travel with every request.
