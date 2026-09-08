@@ -30,6 +30,7 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
   from the folder itself, so one job can touch several scripts. It can never edit the rules file. The scripts it
   touched are listed, and `Ctrl+Tab` / `Ctrl+Shift+Tab` switch the view between them, loaded fresh.
 - **Editor** (Ctrl+E) – CSS is applied while you type, HTML/JS on pause. Syntax colours.
+- **Loading screens** – a `loadscreen` resource is shown with FiveM's load events (stages, data files, progress) played into it, and a stand-in handover name.
 - **New script** – templates with locales (no/en/sv/da/de), `Config.Locale`, English comments:
   NUI menu, Node-built NUI (Vite + React), LB Phone app, NPWD app (the Qbox default phone),
   clothing / barber / tattoo menu (plain or React), no-NUI.
