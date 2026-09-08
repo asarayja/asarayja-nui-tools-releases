@@ -17,6 +17,14 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
 - **Scenes** – every message Lua can send is a button. Lists that Lua fills at runtime are filled from
   the script's own config tables; a recorder resource can capture real data from the game.
 - **Parts** – the sections of a page, so a hidden admin panel can be shown without the right message.
+- **Check** – the rules checked by machine: CSS that breaks on the transparent surface, blocking dialogs, callbacks
+  without `cb()`, missing `onResourceStop`, files not in `fxmanifest`, missing cache busters, hardcoded Norwegian,
+  locale files that disagree, items without an image. A finding opens the editor at the line; the AI can be asked to fix.
+- **Deploy** (`Ctrl+D`) – copy the resource to the server's resources folder and `ensure` it over RCON (⚙ → Server).
+- **Screen** – show the page at 1366×768 … 5120×1440, scaled to fit, to check 21:9 and 32:9 layouts.
+- **AI extras** – a screenshot of the menu with the message, the last turn's changes with diff and Undo per file,
+  recipes (proven prompts for the jobs that come up again and again), a first-time setup that finds the installed CLIs,
+  and a one-click install of GitHub CLI when it is missing (winget / apt / dnf / pacman / brew).
 - **Scripts** (workspace) – pick a folder holding many scripts: every one is listed in a collapsible box with
   its links to the others (exports, events, callbacks, dependencies, images). Show one menu at a time; the AI works
   from the folder itself, so one job can touch several scripts. It can never edit the rules file. The scripts it
