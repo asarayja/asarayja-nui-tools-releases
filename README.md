@@ -19,7 +19,8 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
 - **Parts** – the sections of a page, so a hidden admin panel can be shown without the right message.
 - **Scripts** (workspace) – pick a folder holding many scripts: every one is listed in a collapsible box with
   its links to the others (exports, events, callbacks, dependencies, images). Show one menu at a time; the AI works
-  from the folder itself, so one job can touch several scripts. It can never edit the rules file.
+  from the folder itself, so one job can touch several scripts. It can never edit the rules file. The scripts it
+  touched are listed, and `Ctrl+Tab` / `Ctrl+Shift+Tab` switch the view between them, loaded fresh.
 - **Editor** (Ctrl+E) – CSS is applied while you type, HTML/JS on pause. Syntax colours.
 - **New script** – templates with locales (no/en/sv/da/de), `Config.Locale`, English comments:
   NUI menu, Node-built NUI (Vite + React), LB Phone app, NPWD app (the Qbox default phone),
