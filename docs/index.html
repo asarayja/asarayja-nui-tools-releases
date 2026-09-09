@@ -113,6 +113,7 @@
       <a href="#editor" data-t="s5.b">Edit</a>
       <a href="#check" data-t="s6.b">Check</a>
       <a href="#ai" data-t="s7.b">Let the AI work</a>
+      <a href="#dui" data-t="dui.h">Pages drawn in the world (DUI)</a>
       <a href="#templates" data-t="c5.b">Templates</a>
       <a href="#redm" data-game="redm" data-t="redm.h">RedM: VORP and RSG</a>
       <a href="#server" data-t="s8.b">Send it to the server</a>
@@ -132,7 +133,7 @@
           <div class="card"><b data-t="c2.b">Editor</b><p data-t="c2.p">CSS applies while you type, HTML and JS on pause. The files as a folder tree, the ones the page really loads marked with a dot.</p></div>
           <div class="card"><b data-t="c3.b">Check</b><p data-t="c3.p">The NUI rules checked by machine: CSS that breaks in game, blocking dialogs, callbacks without <code>cb()</code>, files missing from the manifest, locale files that disagree.</p></div>
           <div class="card"><b data-t="c4.b">AI</b><p data-t="c4.p">Claude Code, Codex, Gemini or a local model, always with the rules as its standing instruction. Screenshots of the menu go with the message; every change can be undone per file.</p></div>
-          <div class="card"><b data-t="c5.b">Templates</b><p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in five languages from the start.</p><p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in five languages from the start.</p></div>
+          <div class="card"><b data-t="c5.b">Templates</b><p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p><p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p></div>
           <div class="card"><b data-t="c6.b">Server</b><p data-t="c6.p">Deploy with one key, or browse the server like FileZilla: fetch a resource, edit it here, send it back. Production servers are marked red and ask first.</p></div>
         </div>
       </section>
@@ -168,7 +169,15 @@
       <section id="check">
         <h2 data-t="s6.b">Check</h2>
         <p data-t="s6.p">The <em>Check</em> tab runs the rules on the resource. Errors and warnings are things that break in game; notes are just notes. Click a finding to open the file at the line, or hand the list to the AI.</p>
+        <p data-t="s6.p2">It compares the two halves of the script as well: a message Lua sends that no file in the page listens for, a file the page loads that is not there, two callbacks registered under the same name where only the last one answers, and the framework core called behind the bridge's back - qbx_core and qb-core, vorp_core and rsg-core alike.</p>
         <figure><img src="img/check.png" alt="The Check tab"><figcaption data-t="fig.check">Check: the rules run on the resource. A finding opens the editor at the line; the AI can be asked to fix it.</figcaption></figure>
+      </section>
+
+      <section id="dui">
+        <h2 data-t="dui.h">Pages drawn in the world (DUI)</h2>
+        <p data-t="dui.p1">Some resources draw their page on a texture in the world instead of over the screen: a laptop on a desk, a sign by the road, a phone in a hand. That is a DUI, and it is never <code>ui_page</code>, so nothing finds it by looking at the manifest.</p>
+        <p data-t="dui.p2">The app reads them out of the Lua - <code>CreateDui</code> and ox_lib's <code>lib.dui:new</code> - and lists them under <em>Scenes</em> with the size each one's texture is made at. Pick one and it is shown at exactly that size, because the page was written for those pixels and never scales. Messages from <code>SendDuiMessage</code> are scenes like any other.</p>
+        <p data-t="dui.p3">A DUI has no focus and no cursor: the mouse is pushed in from Lua, and there is no keyboard native at all. It also has no <code>GetParentResourceName()</code>, so a DUI page builds its callback url from <code>location.host</code> - and the app leaves that global undefined on a DUI page, so a page that leans on it fails here the way it fails on the server. The check has its own section for all of it.</p>
       </section>
 
       <section id="ai">
@@ -179,8 +188,8 @@
 
       <section id="templates">
         <h2 data-t="c5.b">Templates</h2>
-        <p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in five languages from the start.</p>
-        <p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in five languages from the start.</p>
+        <p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p>
+        <p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p>
         <figure class="half" data-game="fivem"><img src="img/newscript.png" alt="New script"><figcaption data-t="fig.new">New script: pick a template, a framework and a name, and the folder is ready with locales, config and English comments.</figcaption></figure>
         <figure class="half" data-game="redm"><img src="img/newscript-redm.png" alt="New script, RedM"><figcaption data-t="fig.new.redm">The same dialog on RedM: the templates that fit the game, and VORP or RSG as the framework.</figcaption></figure>
       </section>
@@ -270,7 +279,7 @@ const S = {
     'redm.c5.p': 'Telefonappene, inventaret og klesmenyen blir på FiveM: RedM kler en ped med MetaPed-natives og har verken LB Phone eller NPWD.',
     'redm.c6.b': 'Menyer fra andre ressurser',
     'redm.c6.p': 'Mange VORP-script har ingen egen side og åpner vorp_menu i stedet. De viser ingenting her; et script med egen NUI virker som et hvilket som helst FiveM-script.',
-    'c5.p.redm': 'Nytt script fra mal: NUI-meny, Node-bygget NUI, uten NUI og loading screen, i western-stil med bro til VORP og RSG. Locales på fem språk fra start.',
+    'c5.p.redm': 'Nytt script fra mal: NUI-meny, Node-bygget NUI, uten NUI og loading screen, i western-stil med bro til VORP og RSG. Locales på elleve språk fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).',
     'r7.b': 'RedM i tillegg',
     'r7.p': 'rdr3_warning-linja, ingen ox_lib, karakteren som identitet, bildekatalog per inventar, og noen RSG-sider som ikke åpner uten token.',
     'nav.find': 'Søk i guiden',
@@ -285,7 +294,7 @@ const S = {
     'c2.b': 'Editor', 'c2.p': 'CSS slår inn mens du skriver, HTML og JS ved pause. Filene som et mappetre, de sida faktisk laster merket med en prikk.',
     'c3.b': 'Sjekk', 'c3.p': 'NUI-reglene sjekket av maskin: CSS som ryker i spillet, blokkerende dialoger, callbacks uten <code>cb()</code>, filer som mangler i manifestet, locale-filer som ikke stemmer.',
     'c4.b': 'AI', 'c4.p': 'Claude Code, Codex, Gemini eller en lokal modell, alltid med reglene som fast instruks. Skjermbilde av menyen følger meldinga; hver endring kan angres per fil.',
-    'c5.b': 'Maler', 'c5.p': 'Nytt script fra mal: NUI-meny, inventar, klesmeny, loading screen, LB Phone-, NPWD- og oph3z-telefonapper. Locales på fem språk fra start.',
+    'c5.b': 'Maler', 'c5.p': 'Nytt script fra mal: NUI-meny, inventar, klesmeny, loading screen, LB Phone-, NPWD- og oph3z-telefonapper. Locales på elleve språk fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).',
     'c6.b': 'Server', 'c6.p': 'Deploy med én tast, eller bla på serveren som i FileZilla: hent en ressurs, rediger her, send tilbake. Produksjonsservere er merket rødt og spør først.',
     'look.h': 'En titt rundt',
     'fig.main': 'Panelet til venstre, menyen til høyre, tegnet akkurat som spillet gjør det. Hver scene er én melding fra Lua.',
@@ -301,6 +310,11 @@ const S = {
     's4.b': 'Vis en scene', 's4.p': 'På <em>Scener</em>-fanen er hver melding Lua kan sende en knapp. <em>Vis</em> sender den til sida. Åpne en scene for å redigere dataene før sending. Lister spillet fyller i sanntid gjettes fra scriptets config; en opptaker-ressurs kan fange ekte data i spillet.',
     's5.b': 'Rediger', 's5.p': '<kbd>Ctrl</kbd>+<kbd>E</kbd> åpner editoren ved siden av menyen. Lagre med <kbd>Ctrl</kbd>+<kbd>S</kbd>; med <em>Live</em> på lagres CSS/HTML/JS av seg selv like etter at du har skrevet. <em>Rød test</em> maler sidebakgrunnen rød, så alt som ville vist spillet gjennom blir synlig.',
     's6.b': 'Sjekk', 's6.p': '<em>Sjekk</em>-fanen kjører reglene på ressursen. Feil og advarsler er ting som ryker i spillet; notater er bare notater. Klikk et funn for å åpne fila på linja, eller gi lista til AI-en.',
+    'dui.h': 'Sider tegnet i verden (DUI)',
+    'dui.p1': 'Noen ressurser tegner sida si på en tekstur i verden i stedet for over skjermen: en laptop på et bord, et skilt langs veien, en telefon i hånda. Det er en DUI, og den er aldri <code>ui_page</code>, så ingenting finner den ved å lese manifestet.',
+    'dui.p2': 'Appen leser dem ut av Lua-en – <code>CreateDui</code> og ox_libs <code>lib.dui:new</code> – og lister dem under <em>Scener</em> med størrelsen hver tekstur lages i. Velg en, og den vises i nøyaktig den størrelsen, for sida er skrevet mot de pikslene og skalerer ikke. Meldinger fra <code>SendDuiMessage</code> er scener som alle andre.',
+    'dui.p3': 'En DUI har verken fokus eller markør: musa sendes inn fra Lua, og det finnes ingen native for tastatur i det hele tatt. Den har heller ingen <code>GetParentResourceName()</code>, så en DUI-side bygger callback-adressen sin av <code>location.host</code> – og appen lar den globale være udefinert på en DUI-side, så en side som stoler på den feiler her slik den feiler på serveren. Sjekken har en egen seksjon for alt sammen.',
+    's6.p2': 'Den sammenligner også de to halvdelene av scriptet: en melding Lua sender som ingen fil i sida hører etter, en fil sida laster som ikke finnes, to callbacks registrert på samme navn der bare den siste svarer, og kjernen kalt utenom broen – qbx_core og qb-core, vorp_core og rsg-core.',
     's7.b': 'La AI-en jobbe', 's7.p': 'På <em>AI</em>-fanen beskriver du endringen. AI-en får reglene med hver samtale, kan se et skjermbilde av menyen og spør før den gjør noe risikabelt. Endringene fra en runde listes med diff og <em>Angre</em> per fil. <kbd>Ctrl</kbd>+<kbd>Tab</kbd> bytter mellom scriptene den har rørt.',
     's8.b': 'Send til serveren', 's8.p': 'Under <kbd>⚙</kbd> → <em>Server</em> legger du inn serverne dine: lokal mappe, SFTP eller FTP, hver med navn og rolle (<span class="prod">produksjon</span> eller <span class="dev">dev</span>). <em>Deploy</em> (<kbd>Ctrl</kbd>+<kbd>D</kbd>) bytter ut ressursen på serveren og restarter den over RCON. <em>Server</em> åpner filutforskeren for alt annet.',
     'start.note': 'Gikk noe galt? <kbd>⚙</kbd> → <em>Oppdateringer</em> viser hvor loggfila ligger; de siste 200 linjene er det en feilrapport trenger. Krasjet appen, tilbyr en stripe øverst å kopiere dem.',
@@ -338,7 +352,7 @@ const S = {
     'redm.c5.p': 'Telefonapparna, inventariet och klädmenyn stannar i FiveM: RedM klär en ped med MetaPed-natives och har varken LB Phone eller NPWD.',
     'redm.c6.b': 'Menyer från andra resurser',
     'redm.c6.p': 'Många VORP-skript har ingen egen sida utan öppnar vorp_menu. De visar ingenting här; ett skript med egen NUI fungerar som vilket FiveM-skript som helst.',
-    'c5.p.redm': 'Nytt skript från mall: NUI-meny, Node-byggd NUI, utan NUI och laddningsskärm, i westernstil med brygga till VORP och RSG. Locales på fem språk från start.',
+    'c5.p.redm': 'Nytt skript från mall: NUI-meny, Node-byggd NUI, utan NUI och laddningsskärm, i westernstil med brygga till VORP och RSG. Locales på elva språk från start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).',
     'r7.b': 'RedM därtill',
     'r7.p': 'rdr3_warning-raden, ingen ox_lib, karaktären som identitet, bildkatalog per inventarie, och några RSG-sidor som inte öppnar utan sin token.',
     'nav.find': 'Sök i guiden',
@@ -353,7 +367,7 @@ const S = {
     'c2.b': 'Editor', 'c2.p': 'CSS slår igenom medan du skriver, HTML och JS vid paus. Filerna som ett mappträd, de som sidan verkligen laddar märkta med en punkt.',
     'c3.b': 'Kontroll', 'c3.p': 'NUI-reglerna kontrollerade av maskin: CSS som går sönder i spelet, blockerande dialoger, callbacks utan <code>cb()</code>, filer som saknas i manifestet, locale-filer som inte stämmer.',
     'c4.b': 'AI', 'c4.p': 'Claude Code, Codex, Gemini eller en lokal modell, alltid med reglerna som fast instruktion. Skärmbild av menyn följer meddelandet; varje ändring kan ångras per fil.',
-    'c5.b': 'Mallar', 'c5.p': 'Nytt script från mall: NUI-meny, inventarie, klädmeny, laddningsskärm, LB Phone-, NPWD- och oph3z-telefonappar. Locales på fem språk från start.',
+    'c5.b': 'Mallar', 'c5.p': 'Nytt script från mall: NUI-meny, inventarie, klädmeny, laddningsskärm, LB Phone-, NPWD- och oph3z-telefonappar. Locales på elva språk från start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).',
     'c6.b': 'Server', 'c6.p': 'Deploy med en tangent, eller bläddra på servern som i FileZilla: hämta en resurs, redigera här, skicka tillbaka. Produktionsservrar är märkta röda och frågar först.',
     'look.h': 'En titt runt',
     'fig.main': 'Panelen till vänster, menyn till höger, ritad precis som spelet gör det. Varje scen är ett meddelande från Lua.',
@@ -369,6 +383,11 @@ const S = {
     's4.b': 'Visa en scen', 's4.p': 'På fliken <em>Scener</em> är varje meddelande Lua kan skicka en knapp. <em>Visa</em> skickar det till sidan. Öppna en scen för att redigera data före sändning. Listor som spelet fyller i realtid gissas från scriptets config; en inspelningsresurs kan fånga riktiga data i spelet.',
     's5.b': 'Redigera', 's5.p': '<kbd>Ctrl</kbd>+<kbd>E</kbd> öppnar editorn bredvid menyn. Spara med <kbd>Ctrl</kbd>+<kbd>S</kbd>; med <em>Live</em> på sparas CSS/HTML/JS av sig själva strax efter att du skrivit. <em>Rött test</em> målar sidbakgrunden röd, så allt som skulle visa spelet igenom blir synligt.',
     's6.b': 'Kontroll', 's6.p': 'Fliken <em>Kontroll</em> kör reglerna på resursen. Fel och varningar är sådant som går sönder i spelet; noteringar är bara noteringar. Klicka på ett fynd för att öppna filen på raden, eller ge listan till AI:n.',
+    'dui.h': 'Sidor ritade i världen (DUI)',
+    'dui.p1': 'Vissa resurser ritar sin sida på en textur i världen i stället för över skärmen: en laptop på ett bord, en skylt vid vägen, en telefon i handen. Det är en DUI, och den är aldrig <code>ui_page</code>, så ingenting hittar den genom att läsa manifestet.',
+    'dui.p2': 'Appen läser dem ur Lua-koden – <code>CreateDui</code> och ox_libs <code>lib.dui:new</code> – och listar dem under <em>Scener</em> med storleken varje textur skapas i. Välj en, så visas den i exakt den storleken, för sidan är skriven mot de pixlarna och skalar inte. Meddelanden från <code>SendDuiMessage</code> är scener som alla andra.',
+    'dui.p3': 'En DUI har varken fokus eller markör: musen skickas in från Lua, och det finns ingen native för tangentbord alls. Den har inte heller någon <code>GetParentResourceName()</code>, så en DUI-sida bygger sin callback-adress av <code>location.host</code> – och appen lämnar den globalen odefinierad på en DUI-sida, så en sida som litar på den fallerar här precis som den fallerar på servern. Kontrollen har ett eget avsnitt för allt detta.',
+    's6.p2': 'Den jämför också skriptets två halvor: ett meddelande Lua skickar som ingen fil i sidan lyssnar efter, en fil sidan laddar som inte finns, två callbacks registrerade på samma namn där bara den sista svarar, och kärnan anropad förbi bryggan – qbx_core och qb-core, vorp_core och rsg-core.',
     's7.b': 'Låt AI:n arbeta', 's7.p': 'På fliken <em>AI</em> beskriver du ändringen. AI:n får reglerna med varje samtal, kan se en skärmbild av menyn och frågar innan den gör något riskabelt. Ändringarna från en omgång listas med diff och <em>Ångra</em> per fil. <kbd>Ctrl</kbd>+<kbd>Tab</kbd> växlar mellan de script den rört.',
     's8.b': 'Skicka till servern', 's8.p': 'Under <kbd>⚙</kbd> → <em>Server</em> lägger du in dina servrar: lokal mapp, SFTP eller FTP, var och en med namn och roll (<span class="prod">produktion</span> eller <span class="dev">dev</span>). <em>Deploy</em> (<kbd>Ctrl</kbd>+<kbd>D</kbd>) byter ut resursen på servern och startar om den över RCON. <em>Server</em> öppnar filutforskaren för allt annat.',
     'start.note': 'Gick något fel? <kbd>⚙</kbd> → <em>Uppdateringar</em> visar var loggfilen ligger; de sista 200 raderna är vad en felrapport behöver. Kraschade appen erbjuder en rad högst upp att kopiera dem.',
@@ -406,7 +425,7 @@ const S = {
     'redm.c5.p': 'Telefonapps, inventaret og tøjmenuen bliver på FiveM: RedM klæder en ped med MetaPed-natives og har hverken LB Phone eller NPWD.',
     'redm.c6.b': 'Menuer fra andre ressourcer',
     'redm.c6.p': 'Mange VORP-scripts har ingen egen side og åbner vorp_menu i stedet. De viser intet her; et script med sin egen NUI virker som ethvert FiveM-script.',
-    'c5.p.redm': 'Nyt script fra skabelon: NUI-menu, Node-bygget NUI, uden NUI og loading screen, i westernstil med bro til VORP og RSG. Locales på fem sprog fra start.',
+    'c5.p.redm': 'Nyt script fra skabelon: NUI-menu, Node-bygget NUI, uden NUI og loading screen, i westernstil med bro til VORP og RSG. Locales på elleve sprog fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).',
     'r7.b': 'RedM oveni',
     'r7.p': 'rdr3_warning-linjen, ingen ox_lib, karakteren som identitet, billedkatalog per inventar, og nogle RSG-sider der ikke åbner uden deres token.',
     'nav.find': 'Søg i guiden',
@@ -421,7 +440,7 @@ const S = {
     'c2.b': 'Editor', 'c2.p': 'CSS slår igennem mens du skriver, HTML og JS ved pause. Filerne som et mappetræ, dem siden faktisk henter markeret med en prik.',
     'c3.b': 'Tjek', 'c3.p': 'NUI-reglerne tjekket af maskine: CSS der går i stykker i spillet, blokerende dialoger, callbacks uden <code>cb()</code>, filer der mangler i manifestet, locale-filer der ikke passer sammen.',
     'c4.b': 'AI', 'c4.p': 'Claude Code, Codex, Gemini eller en lokal model, altid med reglerne som fast instruks. Skærmbillede af menuen følger beskeden; hver ændring kan fortrydes per fil.',
-    'c5.b': 'Skabeloner', 'c5.p': 'Nyt script fra skabelon: NUI-menu, inventar, tøjmenu, loading screen, LB Phone-, NPWD- og oph3z-telefonapps. Locales på fem sprog fra start.',
+    'c5.b': 'Skabeloner', 'c5.p': 'Nyt script fra skabelon: NUI-menu, inventar, tøjmenu, loading screen, LB Phone-, NPWD- og oph3z-telefonapps. Locales på elleve sprog fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).',
     'c6.b': 'Server', 'c6.p': 'Deploy med én tast, eller gennemse serveren som i FileZilla: hent en ressource, redigér her, send tilbage. Produktionsservere er markeret røde og spørger først.',
     'look.h': 'Et kig rundt',
     'fig.main': 'Panelet til venstre, menuen til højre, tegnet præcis som spillet gør det. Hver scene er én besked fra Lua.',
@@ -437,6 +456,11 @@ const S = {
     's4.b': 'Vis en scene', 's4.p': 'På fanen <em>Scener</em> er hver besked Lua kan sende en knap. <em>Vis</em> sender den til siden. Åbn en scene for at redigere dataene før afsendelse. Lister spillet fylder i realtid gættes fra scriptets config; en optager-ressource kan fange rigtige data i spillet.',
     's5.b': 'Redigér', 's5.p': '<kbd>Ctrl</kbd>+<kbd>E</kbd> åbner editoren ved siden af menuen. Gem med <kbd>Ctrl</kbd>+<kbd>S</kbd>; med <em>Live</em> slået til gemmes CSS/HTML/JS af sig selv kort efter du har skrevet. <em>Rød test</em> maler sidebaggrunden rød, så alt der ville vise spillet igennem bliver synligt.',
     's6.b': 'Tjek', 's6.p': 'Fanen <em>Tjek</em> kører reglerne på ressourcen. Fejl og advarsler er ting der går i stykker i spillet; noter er bare noter. Klik på et fund for at åbne filen på linjen, eller giv listen til AI\'en.',
+    'dui.h': 'Sider tegnet i verden (DUI)',
+    'dui.p1': 'Nogle ressourcer tegner deres side på en tekstur i verden i stedet for over skærmen: en laptop på et bord, et skilt ved vejen, en telefon i hånden. Det er en DUI, og den er aldrig <code>ui_page</code>, så intet finder den ved at læse manifestet.',
+    'dui.p2': 'Appen læser dem ud af Lua-koden – <code>CreateDui</code> og ox_libs <code>lib.dui:new</code> – og viser dem under <em>Scener</em> med den størrelse, hver tekstur laves i. Vælg en, så vises den i præcis den størrelse, for siden er skrevet til de pixels og skalerer ikke. Beskeder fra <code>SendDuiMessage</code> er scener som alle andre.',
+    'dui.p3': 'En DUI har hverken fokus eller markør: musen sendes ind fra Lua, og der findes slet ingen native til tastatur. Den har heller ingen <code>GetParentResourceName()</code>, så en DUI-side bygger sin callback-adresse af <code>location.host</code> – og appen lader den globale være udefineret på en DUI-side, så en side, der stoler på den, fejler her, som den fejler på serveren. Tjekket har sit eget afsnit om det hele.',
+    's6.p2': 'Den sammenligner også scriptets to halvdele: en besked, Lua sender, som ingen fil i siden lytter efter, en fil siden henter, som ikke findes, to callbacks registreret under samme navn, hvor kun den sidste svarer, og kernen kaldt uden om broen – qbx_core og qb-core, vorp_core og rsg-core.',
     's7.b': 'Lad AI\'en arbejde', 's7.p': 'På fanen <em>AI</em> beskriver du ændringen. AI\'en får reglerne med hver samtale, kan se et skærmbillede af menuen og spørger før den gør noget risikabelt. Ændringerne fra en runde listes med diff og <em>Fortryd</em> per fil. <kbd>Ctrl</kbd>+<kbd>Tab</kbd> skifter mellem de scripts den har rørt.',
     's8.b': 'Send til serveren', 's8.p': 'Under <kbd>⚙</kbd> → <em>Server</em> lægger du dine servere ind: lokal mappe, SFTP eller FTP, hver med navn og rolle (<span class="prod">produktion</span> eller <span class="dev">dev</span>). <em>Deploy</em> (<kbd>Ctrl</kbd>+<kbd>D</kbd>) udskifter ressourcen på serveren og genstarter den over RCON. <em>Server</em> åbner filstifinderen til alt andet.',
     'start.note': 'Gik noget galt? <kbd>⚙</kbd> → <em>Opdateringer</em> viser hvor logfilen ligger; de sidste 200 linjer er hvad en fejlrapport har brug for. Er appen crashet, tilbyder en bjælke øverst at kopiere dem.',
@@ -474,7 +498,7 @@ const S = {
     'redm.c5.p': 'Die Telefon-Apps, das Inventar und das Kleidungsmenü bleiben bei FiveM: RedM kleidet einen Ped mit MetaPed-Natives und hat weder LB Phone noch NPWD.',
     'redm.c6.b': 'Menüs aus anderen Ressourcen',
     'redm.c6.p': 'Viele VORP-Skripte haben keine eigene Seite und öffnen stattdessen vorp_menu. Die zeigen hier nichts; ein Skript mit eigener NUI läuft wie jedes FiveM-Skript.',
-    'c5.p.redm': 'Neues Skript aus einer Vorlage: NUI-Menü, Node-gebautes NUI, ohne NUI und Ladebildschirm, im Western-Look mit Brücke zu VORP und RSG. Locales in fünf Sprachen von Anfang an.',
+    'c5.p.redm': 'Neues Skript aus einer Vorlage: NUI-Menü, Node-gebautes NUI, ohne NUI und Ladebildschirm, im Western-Look mit Brücke zu VORP und RSG. Locales in elf Sprachen von Anfang an (no, en, sv, da, de, fr, nl, es, pl, uk, ro).',
     'r7.b': 'RedM obendrauf',
     'r7.p': 'Die rdr3_warning-Zeile, kein ox_lib, der Charakter als Identität, Bildpfade je Inventar, und einige RSG-Seiten, die ohne ihr Token nicht aufgehen.',
     'nav.find': 'Im Leitfaden suchen',
@@ -489,7 +513,7 @@ const S = {
     'c2.b': 'Editor', 'c2.p': 'CSS wirkt beim Tippen, HTML und JS bei einer Pause. Die Dateien als Ordnerbaum, die von der Seite tatsächlich geladenen mit einem Punkt markiert.',
     'c3.b': 'Prüfung', 'c3.p': 'Die NUI-Regeln maschinell geprüft: CSS, das im Spiel bricht, blockierende Dialoge, Callbacks ohne <code>cb()</code>, fehlende Dateien im Manifest, Locale-Dateien, die nicht zusammenpassen.',
     'c4.b': 'KI', 'c4.p': 'Claude Code, Codex, Gemini oder ein lokales Modell, immer mit den Regeln als fester Anweisung. Ein Screenshot des Menüs geht mit der Nachricht mit; jede Änderung lässt sich pro Datei rückgängig machen.',
-    'c5.b': 'Vorlagen', 'c5.p': 'Neues Skript aus einer Vorlage: NUI-Menü, Inventar, Kleidungsmenü, Ladebildschirm, LB Phone-, NPWD- und oph3z-Telefon-Apps. Locales in fünf Sprachen von Anfang an.',
+    'c5.b': 'Vorlagen', 'c5.p': 'Neues Skript aus einer Vorlage: NUI-Menü, Inventar, Kleidungsmenü, Ladebildschirm, LB Phone-, NPWD- und oph3z-Telefon-Apps. Locales in elf Sprachen von Anfang an (no, en, sv, da, de, fr, nl, es, pl, uk, ro).',
     'c6.b': 'Server', 'c6.p': 'Deploy mit einer Taste, oder den Server wie in FileZilla durchsuchen: eine Ressource holen, hier bearbeiten, zurückschicken. Produktionsserver sind rot markiert und fragen vorher.',
     'look.h': 'Ein Rundgang',
     'fig.main': 'Das Panel links, das Menü rechts, genau so gezeichnet wie im Spiel. Jede Szene ist eine Nachricht aus Lua.',
@@ -505,6 +529,11 @@ const S = {
     's4.b': 'Eine Szene zeigen', 's4.p': 'Im Tab <em>Szenen</em> ist jede Nachricht, die Lua senden kann, ein Knopf. <em>Zeigen</em> schickt sie an die Seite. Eine Szene öffnen, um ihre Daten vor dem Senden zu bearbeiten. Listen, die das Spiel zur Laufzeit füllt, werden aus der Config geraten; eine Recorder-Ressource kann echte Daten im Spiel aufzeichnen.',
     's5.b': 'Bearbeiten', 's5.p': '<kbd>Strg</kbd>+<kbd>E</kbd> öffnet den Editor neben dem Menü. Speichern mit <kbd>Strg</kbd>+<kbd>S</kbd>; mit <em>Live</em> speichern sich CSS/HTML/JS kurz nach dem Tippen selbst. Der <em>Rot-Test</em> färbt den Seitenhintergrund rot, so wird alles sichtbar, was im Spiel durchscheinen würde.',
     's6.b': 'Prüfen', 's6.p': 'Der Tab <em>Prüfung</em> lässt die Regeln auf der Ressource laufen. Fehler und Warnungen sind Dinge, die im Spiel brechen; Notizen sind nur Notizen. Ein Klick auf einen Fund öffnet die Datei an der Zeile, oder die Liste geht an die KI.',
+    'dui.h': 'Im Spiel gezeichnete Seiten (DUI)',
+    'dui.p1': 'Manche Ressourcen zeichnen ihre Seite auf eine Textur in der Welt statt über den Bildschirm: ein Laptop auf dem Tisch, ein Schild an der Straße, ein Telefon in der Hand. Das ist ein DUI, und es ist nie <code>ui_page</code> – im Manifest ist es also nicht zu finden.',
+    'dui.p2': 'Die App liest sie aus dem Lua – <code>CreateDui</code> und ox_libs <code>lib.dui:new</code> – und listet sie unter <em>Szenen</em> mit der Größe, in der die jeweilige Textur erstellt wird. Wähle eine, und sie wird genau in dieser Größe gezeigt, denn die Seite ist für diese Pixel geschrieben und skaliert nicht. Nachrichten aus <code>SendDuiMessage</code> sind Szenen wie alle anderen.',
+    'dui.p3': 'Ein DUI hat weder Fokus noch Cursor: die Maus wird aus Lua hineingeschickt, und für die Tastatur gibt es überhaupt kein Native. Es hat auch kein <code>GetParentResourceName()</code>, also baut eine DUI-Seite ihre Callback-Adresse aus <code>location.host</code> – und die App lässt dieses Global auf einer DUI-Seite undefiniert, damit eine Seite, die sich darauf verlässt, hier so scheitert wie auf dem Server. Die Prüfung hat dafür einen eigenen Abschnitt.',
+    's6.p2': 'Sie vergleicht auch die beiden Hälften des Skripts: eine Nachricht, die Lua sendet und auf die keine Datei der Seite hört, eine Datei, die die Seite lädt und die es nicht gibt, zwei Callbacks unter demselben Namen, von denen nur der letzte antwortet, und den Core an der Brücke vorbei aufgerufen – qbx_core und qb-core, vorp_core und rsg-core.',
     's7.b': 'Die KI arbeiten lassen', 's7.p': 'Im Tab <em>KI</em> beschreibst du die Änderung. Die KI bekommt die Regeln mit jedem Gespräch, kann einen Screenshot des Menüs sehen und fragt, bevor sie etwas Riskantes tut. Die Änderungen einer Runde stehen mit Diff und <em>Rückgängig</em> pro Datei da. <kbd>Strg</kbd>+<kbd>Tab</kbd> wechselt zwischen den berührten Skripten.',
     's8.b': 'Auf den Server schicken', 's8.p': 'Unter <kbd>⚙</kbd> → <em>Server</em> trägst du deine Server ein: ein lokaler Ordner, SFTP oder FTP, jeder mit Namen und Rolle (<span class="prod">Produktion</span> oder <span class="dev">Dev</span>). <em>Deploy</em> (<kbd>Strg</kbd>+<kbd>D</kbd>) ersetzt die Ressource auf dem Server und startet sie über RCON neu. <em>Server</em> öffnet den Datei-Explorer für alles andere.',
     'start.note': 'Etwas ist schiefgegangen? <kbd>⚙</kbd> → <em>Updates</em> zeigt, wo die Logdatei liegt; die letzten 200 Zeilen sind das, was ein Fehlerbericht braucht. Ist die App abgestürzt, bietet eine Leiste oben an, sie zu kopieren.',
@@ -573,7 +602,6 @@ function setGameView(g) {
 document.querySelectorAll('.theme.game button').forEach(b => b.addEventListener('click', () => setGameView(b.dataset.g)));
 let gameView = 'fivem';
 try { gameView = (new URLSearchParams(location.search)).get('game') || localStorage.getItem('game') || 'fivem'; } catch (e) { /* private mode */ }
-setGameView(gameView);
 
 // The guide menu marks the section being read (the last one whose top has passed the mark).
 const links = [...document.querySelectorAll('nav.side a')];
@@ -594,7 +622,12 @@ find.addEventListener('input', () => {
 });
 find.addEventListener('keydown', e => { if (e.key === 'Escape') { find.value = ''; find.dispatchEvent(new Event('input')); } if (e.key === 'Enter') { const hit = links.find(a => !a.hidden); if (hit) hit.click(); } });
 addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
-addEventListener('resize', spy); spy();
+addEventListener('resize', spy);
+// setGameView hides the sections that belong to the other game, and the marker only counts
+// the visible ones - so the game is picked first and the marker runs after it. Calling
+// setGameView any earlier reached spy() before `ticking` existed, and the marker never ran.
+setGameView(gameView);
+spy();
 </script>
 </body>
 </html>
