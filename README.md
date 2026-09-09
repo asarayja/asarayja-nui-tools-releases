@@ -12,7 +12,7 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
 
 **Download:** [Releases](../../releases) – Linux AppImage / deb, Windows portable / installer.
 
-**Getting started, with pictures:** https://asarayja.github.io/asarayja-nui-tools-releases/ (English and Norwegian; the `?` button and F1 in the app open it).
+**Getting started, with pictures:** https://asarayja.github.io/asarayja-nui-tools-releases/ (English, Norwegian, Swedish, Danish and German; the `?` button and F1 in the app open it in the app's own language).
 
 ## What it does
 
