@@ -22,6 +22,13 @@
   select#lang { font:inherit; font-size:13px; padding:5px 8px; border-radius:6px; border:1px solid var(--line); background:var(--surface); color:var(--text); }
   .theme button { background:transparent; border:1px solid var(--line); color:var(--muted); border-radius:6px; padding:4px 9px; cursor:pointer; font:inherit; font-size:13px; }
   .theme button.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .theme.game { margin-right:2px; }
+  [data-game] { display:none; }
+  html[data-ui-game="fivem"] [data-game="fivem"], html[data-ui-game="redm"] [data-game="redm"] { display:block; }
+  html[data-ui-game="fivem"] span[data-game="fivem"], html[data-ui-game="redm"] span[data-game="redm"] { display:inline; }
+  html[data-ui-game="fivem"] nav.side a[data-game="fivem"], html[data-ui-game="redm"] nav.side a[data-game="redm"] { display:block; }
+  /* nav.side a is a stronger selector than [data-game], so the hiding needs to say so too. */
+  html[data-ui-game="fivem"] nav.side a[data-game="redm"], html[data-ui-game="redm"] nav.side a[data-game="fivem"] { display:none; }
   .hero { text-align:center; padding:56px 0 34px; }
   .hero img { width:96px; height:96px; border-radius:22px; box-shadow:0 8px 30px var(--shadow); }
   .hero h1 { font-size:38px; margin:18px 0 8px; letter-spacing:-.5px; }
@@ -78,6 +85,7 @@
   <header class="top">
     <img src="logo.png" alt=""><b>Asarayja NUI Tools</b>
     <select id="lang" title="Language" aria-label="Language"></select>
+    <span class="theme game"><button data-g="fivem">FiveM</button><button data-g="redm">RedM</button></span>
     <span class="theme"><button data-theme="auto" data-t="theme.auto">Auto</button><button data-theme="light" title="Light">☀</button><button data-theme="dark" title="Dark">☾</button></span>
   </header>
 
@@ -106,6 +114,7 @@
       <a href="#check" data-t="s6.b">Check</a>
       <a href="#ai" data-t="s7.b">Let the AI work</a>
       <a href="#templates" data-t="c5.b">Templates</a>
+      <a href="#redm" data-game="redm" data-t="redm.h">RedM: VORP and RSG</a>
       <a href="#server" data-t="s8.b">Send it to the server</a>
       <a href="#keys" data-t="keys.h">Keyboard</a>
       <a href="#rules" data-t="rules.h">The rules, in short</a>
@@ -117,12 +126,13 @@
         <h2 data-t="what.h">What it is</h2>
         <p data-t="what.p1">A FiveM NUI is a web page drawn over the game. Normally you only see it in game: start the server, join, open the menu, find the bug, edit, restart the resource, repeat. Asarayja NUI Tools shows that page on your desktop instead. It reads the resource's Lua, finds every <code>SendNUIMessage</code>, guesses the data the game would send, answers the page's callbacks, and lets you edit HTML, CSS and JS while the menu is on screen.</p>
         <p data-t="what.p2">Around that sits everything that came up while building a server's scripts: templates for new scripts and phone apps, a rule check for the mistakes that only show on the game's transparent surface, an AI tab that works under those rules, Git, and deploy or a file explorer against the server over SFTP or FTP.</p>
+        <p data-game="redm" data-t="redm.intro">RedM works the same way: the page is the same CEF surface, so everything here applies. What differs is the Lua around it, and that has its own section below.</p>
         <div class="grid">
           <div class="card"><b data-t="c1.b">Scenes</b><p data-t="c1.p">Every message Lua can send is a button. Click it and the menu shows that state, filled with data guessed from the script's own config tables.</p></div>
           <div class="card"><b data-t="c2.b">Editor</b><p data-t="c2.p">CSS applies while you type, HTML and JS on pause. The files as a folder tree, the ones the page really loads marked with a dot.</p></div>
           <div class="card"><b data-t="c3.b">Check</b><p data-t="c3.p">The NUI rules checked by machine: CSS that breaks in game, blocking dialogs, callbacks without <code>cb()</code>, files missing from the manifest, locale files that disagree.</p></div>
           <div class="card"><b data-t="c4.b">AI</b><p data-t="c4.p">Claude Code, Codex, Gemini or a local model, always with the rules as its standing instruction. Screenshots of the menu go with the message; every change can be undone per file.</p></div>
-          <div class="card"><b data-t="c5.b">Templates</b><p data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in five languages from the start.</p></div>
+          <div class="card"><b data-t="c5.b">Templates</b><p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in five languages from the start.</p><p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in five languages from the start.</p></div>
           <div class="card"><b data-t="c6.b">Server</b><p data-t="c6.p">Deploy with one key, or browse the server like FileZilla: fetch a resource, edit it here, send it back. Production servers are marked red and ask first.</p></div>
         </div>
       </section>
@@ -168,7 +178,8 @@
 
       <section id="templates">
         <h2 data-t="c5.b">Templates</h2>
-        <p data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in five languages from the start.</p>
+        <p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in five languages from the start.</p>
+        <p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in five languages from the start.</p>
         <figure class="half"><img src="img/newscript.png" alt="New script"><figcaption data-t="fig.new">New script: pick a template, a framework and a name, and the folder is ready with locales, config and English comments.</figcaption></figure>
       </section>
 
@@ -176,6 +187,19 @@
         <h2 data-t="s8.b">Send it to the server</h2>
         <p data-t="s8.p">Under <kbd>⚙</kbd> → <em>Server</em> add your servers: a local folder, SFTP or FTP, each with a name and a role (<span class="prod">production</span> or <span class="dev">dev</span>). <em>Deploy</em> (<kbd>Ctrl</kbd>+<kbd>D</kbd>) replaces the resource on the server and restarts it over RCON. <em>Server</em> opens the file explorer for everything else.</p>
         <figure class="half"><img src="img/explorer.png" alt="The server explorer"><figcaption data-t="fig.explorer">Server: this machine on the left, the server on the right. Fetch, edit locally, send back; existing files ask before they are overwritten.</figcaption></figure>
+      </section>
+
+      <section id="redm" data-game="redm">
+        <h2 data-t="redm.h">RedM: VORP and RSG</h2>
+        <p data-t="redm.p1">Pick RedM under the settings, with <kbd>Ctrl</kbd>+<kbd>G</kbd> or on the button in the header, and everything follows: the templates you are offered, the manifest they get, the framework the bridge talks to, and the list of scripts you opened before.</p>
+        <div class="grid">
+          <div class="card"><b data-t="redm.c1.b">One bridge, two frameworks</b><p data-t="redm.c1.p">VORP and RSG Core come out as the same <code>Framework.*</code> calls, so a script written here runs on both. The identity is the character (charIdentifier on VORP, citizenid on RSG), money is dollars and gold either way, and the callbacks go through the bridge.</p></div>
+          <div class="card"><b data-t="redm.c2.b">The manifest is not the same</b><p data-t="redm.c2.p">A RedM resource needs <code>game 'rdr3'</code> and the mandatory <code>rdr3_warning</code> line, or the server refuses to start it. The check says so if it is missing.</p></div>
+          <div class="card"><b data-t="redm.c3.b">No ox_lib</b><p data-t="redm.c3.p">RSG servers run ox_lib, VORP servers do not. The templates stay off it and go through the bridge instead, so the same script works on both.</p></div>
+          <div class="card"><b data-t="redm.c4.b">A western page</b><p data-t="redm.c4.p">The RedM menu template is cream paper on ink with an engraved frame and a serif face. Rockstar's fonts are not shipped; a server that runs vorp_menu can point at its own.</p></div>
+          <div class="card"><b data-t="redm.c5.b">What is FiveM only</b><p data-t="redm.c5.p">The phone apps, the inventory and the clothing menu templates stay on FiveM: RedM dresses a ped with MetaPed natives and has no LB Phone or NPWD.</p></div>
+          <div class="card"><b data-t="redm.c6.b">Menus from other resources</b><p data-t="redm.c6.p">Many VORP scripts have no page of their own and open vorp_menu instead. Those show nothing here; a script with its own NUI works like any FiveM one.</p></div>
+        </div>
       </section>
 
       <section id="keys">
@@ -203,6 +227,7 @@
           <div class="card"><b data-t="r4.b">Every callback answers</b><p data-t="r4.p">Every <code>RegisterNUICallback</code> calls <code>cb()</code> on every path, or the page hangs.</p></div>
           <div class="card"><b data-t="r5.b">The server decides</b><p data-t="r5.p">Prices, access and validity are checked on the server, never trusted from the page.</p></div>
           <div class="card"><b data-t="r6.b">Locales</b><p data-t="r6.p">Every text the player sees comes from locale files; comments in English.</p></div>
+          <div class="card" data-game="redm"><b data-t="r7.b">RedM on top</b><p data-t="r7.p">The rdr3_warning line, no ox_lib, the character as the identity, item images per inventory, and some RSG pages that will not open without their token.</p></div>
         </div>
       </section>
 
@@ -222,6 +247,24 @@ const LANGS = { en: 'English', no: 'Norsk', sv: 'Svenska', da: 'Dansk', de: 'Deu
 const S = {
   no: {
     'theme.auto': 'Auto',
+    'redm.h': 'RedM: VORP og RSG',
+    'redm.intro': 'RedM virker på samme måte: sida er den samme CEF-flata, så alt her gjelder. Det som er annerledes er Lua-en rundt, og den har sin egen del lenger nede.',
+    'redm.p1': 'Velg RedM i innstillingene, med <kbd>Ctrl</kbd>+<kbd>G</kbd> eller på knappen øverst, så følger resten med: malene du får, manifestet de får, rammeverket broen snakker med, og lista over script du har åpnet før.',
+    'redm.c1.b': 'Én bro, to rammeverk',
+    'redm.c1.p': 'VORP og RSG Core kommer ut som de samme <code>Framework.*</code>-kallene, så et script laget her kjører på begge. Identiteten er karakteren (charIdentifier på VORP, citizenid på RSG), penger er dollar og gull uansett, og callbacks går gjennom broen.',
+    'redm.c2.b': 'Manifestet er ikke likt',
+    'redm.c2.p': 'En RedM-ressurs må ha <code>game \'rdr3\'</code> og den obligatoriske <code>rdr3_warning</code>-linja, ellers nekter serveren å starte den. Sjekken sier ifra hvis den mangler.',
+    'redm.c3.b': 'Ingen ox_lib',
+    'redm.c3.p': 'RSG-servere kjører ox_lib, VORP-servere gjør det ikke. Malene holder seg unna og går gjennom broen i stedet, så samme script virker på begge.',
+    'redm.c4.b': 'En western-side',
+    'redm.c4.p': 'RedM-menymalen er kremfarget papir på blekk, med gravert ramme og serif. Rockstars fonter følger ikke med; en server som kjører vorp_menu kan peke på sine egne.',
+    'redm.c5.b': 'Det som bare er FiveM',
+    'redm.c5.p': 'Telefonappene, inventaret og klesmenyen blir på FiveM: RedM kler en ped med MetaPed-natives og har verken LB Phone eller NPWD.',
+    'redm.c6.b': 'Menyer fra andre ressurser',
+    'redm.c6.p': 'Mange VORP-script har ingen egen side og åpner vorp_menu i stedet. De viser ingenting her; et script med egen NUI virker som et hvilket som helst FiveM-script.',
+    'c5.p.redm': 'Nytt script fra mal: NUI-meny, Node-bygget NUI, uten NUI og loading screen, i western-stil med bro til VORP og RSG. Locales på fem språk fra start.',
+    'r7.b': 'RedM i tillegg',
+    'r7.p': 'rdr3_warning-linja, ingen ox_lib, karakteren som identitet, bildekatalog per inventar, og noen RSG-sider som ikke åpner uten token.',
     'nav.find': 'Søk i guiden',
     'nav.h': 'Guiden', 'sec.problems': 'Når noe går galt',
     lead: 'Se, rediger og bygg FiveM-NUI-menyer utenfor spillet. Åpne en ressurs, se menyen slik spillet tegner den, fiks den live, sjekk den mot reglene og send den til serveren.',
@@ -268,6 +311,24 @@ const S = {
   },
   sv: {
     'theme.auto': 'Auto',
+    'redm.h': 'RedM: VORP och RSG',
+    'redm.intro': 'RedM fungerar likadant: sidan är samma CEF-yta, så allt här gäller. Det som skiljer är Lua-koden runt omkring, och den har en egen del längre ner.',
+    'redm.p1': 'Välj RedM i inställningarna, med <kbd>Ctrl</kbd>+<kbd>G</kbd> eller på knappen högst upp, så följer resten med: mallarna du får, manifestet de får, ramverket bryggan pratar med och listan över skript du öppnat tidigare.',
+    'redm.c1.b': 'En brygga, två ramverk',
+    'redm.c1.p': 'VORP och RSG Core kommer ut som samma <code>Framework.*</code>-anrop, så ett skript som byggs här kör på båda. Identiteten är karaktären (charIdentifier på VORP, citizenid på RSG), pengar är dollar och guld ändå, och callbacks går genom bryggan.',
+    'redm.c2.b': 'Manifestet är inte likadant',
+    'redm.c2.p': 'En RedM-resurs behöver <code>game \'rdr3\'</code> och den obligatoriska <code>rdr3_warning</code>-raden, annars vägrar servern starta den. Kontrollen säger till om den saknas.',
+    'redm.c3.b': 'Ingen ox_lib',
+    'redm.c3.p': 'RSG-servrar kör ox_lib, VORP-servrar gör det inte. Mallarna håller sig undan och går genom bryggan i stället, så samma skript fungerar på båda.',
+    'redm.c4.b': 'En westernsida',
+    'redm.c4.p': 'RedM-menymallen är gräddvitt papper på bläck, med graverad ram och serif. Rockstars typsnitt följer inte med; en server som kör vorp_menu kan peka på sina egna.',
+    'redm.c5.b': 'Det som bara finns i FiveM',
+    'redm.c5.p': 'Telefonapparna, inventariet och klädmenyn stannar i FiveM: RedM klär en ped med MetaPed-natives och har varken LB Phone eller NPWD.',
+    'redm.c6.b': 'Menyer från andra resurser',
+    'redm.c6.p': 'Många VORP-skript har ingen egen sida utan öppnar vorp_menu. De visar ingenting här; ett skript med egen NUI fungerar som vilket FiveM-skript som helst.',
+    'c5.p.redm': 'Nytt skript från mall: NUI-meny, Node-byggd NUI, utan NUI och laddningsskärm, i westernstil med brygga till VORP och RSG. Locales på fem språk från start.',
+    'r7.b': 'RedM därtill',
+    'r7.p': 'rdr3_warning-raden, ingen ox_lib, karaktären som identitet, bildkatalog per inventarie, och några RSG-sidor som inte öppnar utan sin token.',
     'nav.find': 'Sök i guiden',
     'nav.h': 'Guiden', 'sec.problems': 'När något går fel',
     lead: 'Se, redigera och bygg FiveM-NUI-menyer utanför spelet. Öppna en resurs, se menyn så som spelet ritar den, fixa den live, kontrollera den mot reglerna och skicka den till servern.',
@@ -314,6 +375,24 @@ const S = {
   },
   da: {
     'theme.auto': 'Auto',
+    'redm.h': 'RedM: VORP og RSG',
+    'redm.intro': 'RedM virker på samme måde: siden er den samme CEF-flade, så alt her gælder. Det der er anderledes er Lua-koden rundt om, og den har sin egen del længere nede.',
+    'redm.p1': 'Vælg RedM i indstillingerne, med <kbd>Ctrl</kbd>+<kbd>G</kbd> eller på knappen øverst, så følger resten med: skabelonerne du får, manifestet de får, frameworket broen taler med, og listen over scripts du har åbnet før.',
+    'redm.c1.b': 'Én bro, to frameworks',
+    'redm.c1.p': 'VORP og RSG Core kommer ud som de samme <code>Framework.*</code>-kald, så et script lavet her kører på begge. Identiteten er karakteren (charIdentifier på VORP, citizenid på RSG), penge er dollars og guld uanset, og callbacks går gennem broen.',
+    'redm.c2.b': 'Manifestet er ikke ens',
+    'redm.c2.p': 'En RedM-ressource skal have <code>game \'rdr3\'</code> og den obligatoriske <code>rdr3_warning</code>-linje, ellers nægter serveren at starte den. Tjekket siger til hvis den mangler.',
+    'redm.c3.b': 'Ingen ox_lib',
+    'redm.c3.p': 'RSG-servere kører ox_lib, VORP-servere gør ikke. Skabelonerne holder sig fra den og går gennem broen i stedet, så samme script virker på begge.',
+    'redm.c4.b': 'En westernside',
+    'redm.c4.p': 'RedM-menuskabelonen er cremefarvet papir på blæk, med graveret ramme og serif. Rockstars skrifttyper følger ikke med; en server der kører vorp_menu kan pege på sine egne.',
+    'redm.c5.b': 'Det der kun er FiveM',
+    'redm.c5.p': 'Telefonapps, inventaret og tøjmenuen bliver på FiveM: RedM klæder en ped med MetaPed-natives og har hverken LB Phone eller NPWD.',
+    'redm.c6.b': 'Menuer fra andre ressourcer',
+    'redm.c6.p': 'Mange VORP-scripts har ingen egen side og åbner vorp_menu i stedet. De viser intet her; et script med sin egen NUI virker som ethvert FiveM-script.',
+    'c5.p.redm': 'Nyt script fra skabelon: NUI-menu, Node-bygget NUI, uden NUI og loading screen, i westernstil med bro til VORP og RSG. Locales på fem sprog fra start.',
+    'r7.b': 'RedM oveni',
+    'r7.p': 'rdr3_warning-linjen, ingen ox_lib, karakteren som identitet, billedkatalog per inventar, og nogle RSG-sider der ikke åbner uden deres token.',
     'nav.find': 'Søg i guiden',
     'nav.h': 'Guiden', 'sec.problems': 'Når noget går galt',
     lead: 'Se, redigér og byg FiveM-NUI-menuer uden for spillet. Åbn en ressource, se menuen som spillet tegner den, ret den live, tjek den mod reglerne og send den til serveren.',
@@ -360,6 +439,24 @@ const S = {
   },
   de: {
     'theme.auto': 'Auto',
+    'redm.h': 'RedM: VORP und RSG',
+    'redm.intro': 'RedM funktioniert genauso: die Seite ist dieselbe CEF-Fläche, alles hier gilt. Anders ist das Lua drumherum, und dafür gibt es weiter unten einen eigenen Abschnitt.',
+    'redm.p1': 'RedM in den Einstellungen wählen, mit <kbd>Strg</kbd>+<kbd>G</kbd> oder über den Knopf oben, und der Rest folgt: die angebotenen Vorlagen, ihr Manifest, das Framework, mit dem die Brücke spricht, und die Liste der zuletzt geöffneten Skripte.',
+    'redm.c1.b': 'Eine Brücke, zwei Frameworks',
+    'redm.c1.p': 'VORP und RSG Core kommen als dieselben <code>Framework.*</code>-Aufrufe heraus, ein hier gebautes Skript läuft also auf beiden. Die Identität ist der Charakter (charIdentifier bei VORP, citizenid bei RSG), Geld sind ohnehin Dollar und Gold, und Callbacks gehen über die Brücke.',
+    'redm.c2.b': 'Das Manifest ist anders',
+    'redm.c2.p': 'Eine RedM-Ressource braucht <code>game \'rdr3\'</code> und die Pflichtzeile <code>rdr3_warning</code>, sonst startet der Server sie nicht. Die Prüfung sagt Bescheid, wenn sie fehlt.',
+    'redm.c3.b': 'Kein ox_lib',
+    'redm.c3.p': 'RSG-Server nutzen ox_lib, VORP-Server nicht. Die Vorlagen lassen es weg und gehen über die Brücke, damit dasselbe Skript auf beiden läuft.',
+    'redm.c4.b': 'Eine Western-Seite',
+    'redm.c4.p': 'Die RedM-Menüvorlage ist cremefarbenes Papier auf Tinte, mit graviertem Rahmen und Serifen. Rockstars Schriften liegen nicht bei; ein Server mit vorp_menu kann auf seine eigenen zeigen.',
+    'redm.c5.b': 'Nur bei FiveM',
+    'redm.c5.p': 'Die Telefon-Apps, das Inventar und das Kleidungsmenü bleiben bei FiveM: RedM kleidet einen Ped mit MetaPed-Natives und hat weder LB Phone noch NPWD.',
+    'redm.c6.b': 'Menüs aus anderen Ressourcen',
+    'redm.c6.p': 'Viele VORP-Skripte haben keine eigene Seite und öffnen stattdessen vorp_menu. Die zeigen hier nichts; ein Skript mit eigener NUI läuft wie jedes FiveM-Skript.',
+    'c5.p.redm': 'Neues Skript aus einer Vorlage: NUI-Menü, Node-gebautes NUI, ohne NUI und Ladebildschirm, im Western-Look mit Brücke zu VORP und RSG. Locales in fünf Sprachen von Anfang an.',
+    'r7.b': 'RedM obendrauf',
+    'r7.p': 'Die rdr3_warning-Zeile, kein ox_lib, der Charakter als Identität, Bildpfade je Inventar, und einige RSG-Seiten, die ohne ihr Token nicht aufgehen.',
     'nav.find': 'Im Leitfaden suchen',
     'nav.h': 'Der Leitfaden', 'sec.problems': 'Wenn etwas schiefgeht',
     lead: 'FiveM-NUI-Menüs außerhalb des Spiels ansehen, bearbeiten und bauen. Eine Ressource öffnen, das Menü so sehen wie das Spiel es zeichnet, live reparieren, gegen die Regeln prüfen und auf den Server schicken.',
@@ -445,6 +542,19 @@ document.querySelectorAll('.theme button').forEach(b => b.addEventListener('clic
 let theme = 'auto'; try { theme = localStorage.getItem('theme') || 'auto'; } catch (e) { /* private mode */ }
 setTheme(theme);
 
+// FiveM or RedM: the same page, the parts that differ swapped. Remembered like the language.
+function setGameView(g) {
+  g = g === 'redm' ? 'redm' : 'fivem';
+  root.setAttribute('data-ui-game', g);
+  try { localStorage.setItem('game', g); } catch (e) { /* private mode */ }
+  document.querySelectorAll('.theme.game button').forEach(b => b.classList.toggle('on', b.dataset.g === g));
+  if (typeof spy === 'function') spy();
+}
+document.querySelectorAll('.theme.game button').forEach(b => b.addEventListener('click', () => setGameView(b.dataset.g)));
+let gameView = 'fivem';
+try { gameView = (new URLSearchParams(location.search)).get('game') || localStorage.getItem('game') || 'fivem'; } catch (e) { /* private mode */ }
+setGameView(gameView);
+
 // The guide menu marks the section being read (the last one whose top has passed the mark).
 const links = [...document.querySelectorAll('nav.side a')];
 const secs = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
@@ -452,7 +562,7 @@ let ticking = false;
 function spy() {
   ticking = false;
   let at = 0;
-  secs.forEach((sec, i) => { if (sec.getBoundingClientRect().top <= 90) at = i; });
+  secs.forEach((sec, i) => { if (sec.offsetParent !== null && sec.getBoundingClientRect().top <= 90) at = i; });
   if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) at = secs.length - 1;
   links.forEach((a, i) => a.classList.toggle('on', i === at));
 }
