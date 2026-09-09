@@ -78,6 +78,17 @@
     nav.side a { border:1px solid var(--line); border-radius:20px; padding:4px 12px; }
     nav.side a.on { border-color:var(--accent); }
   }
+
+  /* Back to top: sits out of the way at the bottom right, appears once the reader has scrolled
+     past a screenful, and follows the page's own colours. */
+  #totop { position:fixed; right:18px; bottom:18px; width:40px; height:40px; border-radius:12px;
+           border:1px solid var(--line); background:var(--surface); color:var(--fg);
+           font-size:17px; line-height:1; cursor:pointer; display:grid; place-items:center;
+           opacity:0; pointer-events:none; transform:translateY(8px);
+           transition:opacity .18s ease, transform .18s ease; box-shadow:0 6px 20px rgba(0,0,0,.18); z-index:40; }
+  #totop.on { opacity:1; pointer-events:auto; transform:none; }
+  #totop:hover { border-color:var(--accent, #3b82f6); color:var(--accent, #3b82f6); }
+  @media print { #totop { display:none; } }
 </style>
 </head>
 <body>
@@ -92,7 +103,8 @@
   <div class="hero">
     <img src="logo.png" alt="">
     <h1>Asarayja NUI Tools</h1>
-    <p class="lead" data-t="lead">See, edit and build FiveM NUI menus outside the game. Open a resource, watch its menu the way the game draws it, fix it live, check it against the rules, and send it to the server.</p>
+    <p class="lead" data-game="fivem" data-t="lead">See, edit and build FiveM NUI menus outside the game. Open a resource, watch its menu the way the game draws it, fix it live, check it against the rules, and send it to the server.</p>
+    <p class="lead" data-game="redm" data-t="lead.redm">See, edit and build RedM NUI menus outside the game. Open a resource, watch its menu the way the game draws it, fix it live, check it against the rules, and send it to the server.</p>
     <div class="dl">
       <a class="primary" href="https://github.com/asarayja/asarayja-nui-tools-releases/releases/latest" data-t="dl.download">Download – latest release</a>
       <a href="#start" data-t="dl.start">Getting started</a>
@@ -125,7 +137,8 @@
     <main>
       <section id="what">
         <h2 data-t="what.h">What it is</h2>
-        <p data-t="what.p1">A FiveM NUI is a web page drawn over the game. Normally you only see it in game: start the server, join, open the menu, find the bug, edit, restart the resource, repeat. Asarayja NUI Tools shows that page on your desktop instead. It reads the resource's Lua, finds every <code>SendNUIMessage</code>, guesses the data the game would send, answers the page's callbacks, and lets you edit HTML, CSS and JS while the menu is on screen.</p>
+        <p data-game="redm" data-t="what.p1.redm">A RedM NUI is a web page drawn over the game. Normally you only see it in game: start the server, join, open the menu, find the bug, edit, restart the resource, repeat. Asarayja NUI Tools shows that page on your desktop instead. It reads the resource's Lua, finds every <code>SendNUIMessage</code>, guesses the data the game would send, answers the page's callbacks, and lets you edit HTML, CSS and JS while the menu is on screen.</p>
+        <p data-game="fivem" data-t="what.p1">A FiveM NUI is a web page drawn over the game. Normally you only see it in game: start the server, join, open the menu, find the bug, edit, restart the resource, repeat. Asarayja NUI Tools shows that page on your desktop instead. It reads the resource's Lua, finds every <code>SendNUIMessage</code>, guesses the data the game would send, answers the page's callbacks, and lets you edit HTML, CSS and JS while the menu is on screen.</p>
         <p data-t="what.p2">Around that sits everything that came up while building a server's scripts: templates for new scripts and phone apps, a rule check for the mistakes that only show on the game's transparent surface, an AI tab that works under those rules, Git, and deploy or a file explorer against the server over SFTP or FTP.</p>
         <p data-game="redm" data-t="redm.intro">RedM works the same way: the page is the same CEF surface, so everything here applies. What differs is the Lua around it, and that has its own section below.</p>
         <div class="grid">
@@ -252,6 +265,7 @@
   </div>
 
   <footer data-t="footer">Asarayja NUI Tools · <a href="https://github.com/asarayja/asarayja-nui-tools-releases">Releases and issues on GitHub</a> · MIT licence.</footer>
+<button id="totop" title="Back to top" data-t-title="totop" aria-label="Back to top">↑</button>
 </div>
 <script>
 // The page in the languages the app itself speaks. English is the source: it stands in the HTML
@@ -360,7 +374,11 @@ const S = {
   "r6.b": "Locales",
   "r6.p": "All tekst spilleren ser kommer fra locale-filer; kommentarer på engelsk.",
   "footer": "Asarayja NUI Tools · <a href=\"https://github.com/asarayja/asarayja-nui-tools-releases\">Utgivelser og feilmeldinger på GitHub</a> · MIT-lisens.",
-  "title": "Asarayja NUI Tools – se, rediger og bygg FiveM-NUI-menyer utenfor spillet"
+  "title": "Asarayja NUI Tools – se, rediger og bygg FiveM-NUI-menyer utenfor spillet",
+  "lead.redm": "Se, rediger og bygg RedM-NUI-menyer utenfor spillet. Åpne en ressurs, se menyen slik spillet tegner den, fiks den live, sjekk den mot reglene og send den til serveren.",
+  "what.p1.redm": "En RedM-NUI er en nettside som tegnes over spillet. Vanligvis ser du den bare i spillet: start serveren, koble til, åpne menyen, finn feilen, rediger, restart ressursen, gjenta. Asarayja NUI Tools viser den sida på skrivebordet i stedet. Den leser ressursens Lua, finner hver <code>SendNUIMessage</code>, gjetter dataene spillet ville sendt, svarer på sidas callbacks og lar deg redigere HTML, CSS og JS mens menyen står på skjermen.",
+  "title.redm": "Asarayja NUI Tools – se, rediger og bygg RedM-NUI-menyer utenfor spillet",
+  "totop": "Tilbake til toppen"
  },
  "sv": {
   "theme.auto": "Auto",
@@ -464,7 +482,11 @@ const S = {
   "r6.b": "Locales",
   "r6.p": "All text spelaren ser kommer från locale-filer; kommentarer på engelska.",
   "footer": "Asarayja NUI Tools · <a href=\"https://github.com/asarayja/asarayja-nui-tools-releases\">Utgåvor och felrapporter på GitHub</a> · MIT-licens.",
-  "title": "Asarayja NUI Tools – se, redigera och bygg FiveM-NUI-menyer utanför spelet"
+  "title": "Asarayja NUI Tools – se, redigera och bygg FiveM-NUI-menyer utanför spelet",
+  "lead.redm": "Se, redigera och bygg RedM NUI-menyer utanför spelet. Öppna en resurs, se menyn som spelet ritar den, fixa den live, kontrollera den mot reglerna och skicka den till servern.",
+  "what.p1.redm": "En RedM-NUI är en webbsida som ritas över spelet. Vanligtvis ser du den bara i spelet: starta servern, anslut, öppna menyn, hitta felet, redigera, starta om resursen, upprepa. Asarayja NUI Tools visar den sidan på skrivbordet i stället. Den läser resursens Lua, hittar varje <code>SendNUIMessage</code>, gissar datan spelet skulle skicka, svarar på sidans callbacks och låter dig redigera HTML, CSS och JS medan menyn står på skärmen.",
+  "title.redm": "Asarayja NUI Tools – se, redigera och bygg RedM NUI-menyer utanför spelet",
+  "totop": "Tillbaka till toppen"
  },
  "da": {
   "theme.auto": "Auto",
@@ -568,7 +590,11 @@ const S = {
   "r6.b": "Locales",
   "r6.p": "Al tekst spilleren ser kommer fra locale-filer; kommentarer på engelsk.",
   "footer": "Asarayja NUI Tools · <a href=\"https://github.com/asarayja/asarayja-nui-tools-releases\">Udgivelser og fejl på GitHub</a> · MIT-licens.",
-  "title": "Asarayja NUI Tools – se, redigér og byg FiveM-NUI-menuer uden for spillet"
+  "title": "Asarayja NUI Tools – se, redigér og byg FiveM-NUI-menuer uden for spillet",
+  "lead.redm": "Se, rediger og byg RedM NUI-menuer uden for spillet. Åbn en ressource, se menuen som spillet tegner den, ret den live, tjek den mod reglerne og send den til serveren.",
+  "what.p1.redm": "En RedM-NUI er en webside, der tegnes over spillet. Normalt ser du den kun i spillet: start serveren, forbind, åbn menuen, find fejlen, ret, genstart ressourcen, forfra. Asarayja NUI Tools viser den side på skrivebordet i stedet. Den læser ressourcens Lua, finder hver <code>SendNUIMessage</code>, gætter de data spillet ville sende, svarer på sidens callbacks og lader dig rette HTML, CSS og JS, mens menuen står på skærmen.",
+  "title.redm": "Asarayja NUI Tools – se, rediger og byg RedM NUI-menuer uden for spillet",
+  "totop": "Tilbage til toppen"
  },
  "de": {
   "theme.auto": "Auto",
@@ -672,7 +698,11 @@ const S = {
   "r6.b": "Locales",
   "r6.p": "Jeder Text, den der Spieler sieht, kommt aus Locale-Dateien; Kommentare auf Englisch.",
   "footer": "Asarayja NUI Tools · <a href=\"https://github.com/asarayja/asarayja-nui-tools-releases\">Releases und Fehler auf GitHub</a> · MIT-Lizenz.",
-  "title": "Asarayja NUI Tools – FiveM-NUI-Menüs außerhalb des Spiels ansehen, bearbeiten und bauen"
+  "title": "Asarayja NUI Tools – FiveM-NUI-Menüs außerhalb des Spiels ansehen, bearbeiten und bauen",
+  "lead.redm": "RedM-NUI-Menüs außerhalb des Spiels ansehen, bearbeiten und bauen. Öffne eine Ressource, sieh ihr Menü so, wie das Spiel es zeichnet, repariere es live, prüfe es gegen die Regeln und schick es auf den Server.",
+  "what.p1.redm": "Ein RedM-NUI ist eine Webseite, die über das Spiel gezeichnet wird. Normalerweise siehst du sie nur im Spiel: Server starten, verbinden, Menü öffnen, Fehler finden, ändern, Ressource neu starten, von vorn. Asarayja NUI Tools zeigt diese Seite stattdessen auf deinem Desktop. Es liest das Lua der Ressource, findet jedes <code>SendNUIMessage</code>, errät die Daten, die das Spiel senden würde, beantwortet die Callbacks der Seite und lässt dich HTML, CSS und JS ändern, während das Menü auf dem Bildschirm steht.",
+  "title.redm": "Asarayja NUI Tools – RedM-NUI-Menüs außerhalb des Spiels ansehen, bearbeiten und bauen",
+  "totop": "Zurück nach oben"
  },
  "fr": {
   "theme.auto": "Auto",
@@ -776,7 +806,11 @@ const S = {
   "r6.b": "Locales",
   "r6.p": "Tout texte vu par le joueur vient des fichiers de langue ; les commentaires sont en anglais.",
   "footer": "Asarayja NUI Tools · <a href=\"https://github.com/asarayja/asarayja-nui-tools-releases\">Versions et signalements sur GitHub</a> · licence MIT.",
-  "title": "Asarayja NUI Tools – voir, modifier et construire des menus NUI FiveM hors du jeu"
+  "title": "Asarayja NUI Tools – voir, modifier et construire des menus NUI FiveM hors du jeu",
+  "lead.redm": "Voyez, modifiez et construisez des menus NUI RedM hors du jeu. Ouvrez une ressource, regardez son menu tel que le jeu le dessine, corrigez-le en direct, vérifiez-le contre les règles et envoyez-le au serveur.",
+  "what.p1.redm": "Une NUI RedM est une page web dessinée par-dessus le jeu. D'ordinaire on ne la voit qu'en jeu : démarrer le serveur, se connecter, ouvrir le menu, trouver le bug, modifier, redémarrer la ressource, recommencer. Asarayja NUI Tools montre cette page sur votre bureau à la place. Il lit le Lua de la ressource, trouve chaque <code>SendNUIMessage</code>, devine les données que le jeu enverrait, répond aux callbacks de la page et vous laisse modifier le HTML, le CSS et le JS pendant que le menu est à l'écran.",
+  "title.redm": "Asarayja NUI Tools – voir, modifier et construire des menus NUI RedM hors du jeu",
+  "totop": "Retour en haut"
  },
  "nl": {
   "theme.auto": "Auto",
@@ -880,7 +914,11 @@ const S = {
   "r6.b": "Locales",
   "r6.p": "Alle tekst die de speler ziet komt uit taalbestanden; commentaren in het Engels.",
   "footer": "Asarayja NUI Tools · <a href=\"https://github.com/asarayja/asarayja-nui-tools-releases\">Releases en meldingen op GitHub</a> · MIT-licentie.",
-  "title": "Asarayja NUI Tools – FiveM NUI-menu's bekijken, bewerken en bouwen buiten het spel"
+  "title": "Asarayja NUI Tools – FiveM NUI-menu's bekijken, bewerken en bouwen buiten het spel",
+  "lead.redm": "Bekijk, bewerk en bouw RedM NUI-menu's buiten het spel. Open een resource, zie het menu zoals het spel het tekent, verbeter het live, controleer het tegen de regels en stuur het naar de server.",
+  "what.p1.redm": "Een RedM-NUI is een webpagina die over het spel wordt getekend. Normaal zie je hem alleen in het spel: server starten, verbinden, menu openen, de fout vinden, bewerken, de resource herstarten, opnieuw. Asarayja NUI Tools toont die pagina in plaats daarvan op je bureaublad. Het leest het Lua van de resource, vindt elke <code>SendNUIMessage</code>, raadt de gegevens die het spel zou sturen, beantwoordt de callbacks van de pagina en laat je HTML, CSS en JS bewerken terwijl het menu op het scherm staat.",
+  "title.redm": "Asarayja NUI Tools – RedM NUI-menu's bekijken, bewerken en bouwen buiten het spel",
+  "totop": "Terug naar boven"
  },
  "es": {
   "theme.auto": "Auto",
@@ -984,7 +1022,11 @@ const S = {
   "r6.b": "Locales",
   "r6.p": "Todo el texto que ve el jugador viene de archivos de idioma; los comentarios en inglés.",
   "footer": "Asarayja NUI Tools · <a href=\"https://github.com/asarayja/asarayja-nui-tools-releases\">Versiones e incidencias en GitHub</a> · licencia MIT.",
-  "title": "Asarayja NUI Tools – ver, editar y construir menús NUI de FiveM fuera del juego"
+  "title": "Asarayja NUI Tools – ver, editar y construir menús NUI de FiveM fuera del juego",
+  "lead.redm": "Ve, edita y construye menús NUI de RedM fuera del juego. Abre un recurso, mira su menú tal como lo dibuja el juego, arréglalo en vivo, compruébalo contra las reglas y envíalo al servidor.",
+  "what.p1.redm": "Una NUI de RedM es una página web dibujada sobre el juego. Normalmente solo la ves en el juego: arrancar el servidor, conectarte, abrir el menú, encontrar el fallo, editar, reiniciar el recurso, repetir. Asarayja NUI Tools muestra esa página en tu escritorio. Lee el Lua del recurso, encuentra cada <code>SendNUIMessage</code>, adivina los datos que enviaría el juego, responde a los callbacks de la página y te deja editar HTML, CSS y JS mientras el menú está en pantalla.",
+  "title.redm": "Asarayja NUI Tools – ver, editar y construir menús NUI de RedM fuera del juego",
+  "totop": "Volver arriba"
  },
  "pl": {
   "theme.auto": "Auto",
@@ -1088,7 +1130,11 @@ const S = {
   "r6.b": "Locale",
   "r6.p": "Każdy tekst, który widzi gracz, pochodzi z plików językowych; komentarze po angielsku.",
   "footer": "Asarayja NUI Tools · <a href=\"https://github.com/asarayja/asarayja-nui-tools-releases\">Wydania i zgłoszenia na GitHubie</a> · licencja MIT.",
-  "title": "Asarayja NUI Tools – oglądaj, edytuj i buduj menu NUI dla FiveM poza grą"
+  "title": "Asarayja NUI Tools – oglądaj, edytuj i buduj menu NUI dla FiveM poza grą",
+  "lead.redm": "Oglądaj, edytuj i buduj menu NUI dla RedM poza grą. Otwórz zasób, zobacz jego menu tak, jak rysuje je gra, popraw na żywo, sprawdź względem reguł i wyślij na serwer.",
+  "what.p1.redm": "NUI w RedM to strona internetowa rysowana na wierzchu gry. Zwykle widzisz ją tylko w grze: uruchom serwer, połącz się, otwórz menu, znajdź błąd, popraw, zrestartuj zasób, od nowa. Asarayja NUI Tools pokazuje tę stronę na twoim pulpicie. Czyta Lua zasobu, znajduje każde <code>SendNUIMessage</code>, zgaduje dane, które wysłałaby gra, odpowiada na callbacki strony i pozwala edytować HTML, CSS i JS, gdy menu jest na ekranie.",
+  "title.redm": "Asarayja NUI Tools – oglądaj, edytuj i buduj menu NUI dla RedM poza grą",
+  "totop": "Wróć na górę"
  },
  "uk": {
   "theme.auto": "Авто",
@@ -1192,7 +1238,11 @@ const S = {
   "r6.b": "Локалі",
   "r6.p": "Увесь текст, який бачить гравець, походить із мовних файлів; коментарі англійською.",
   "footer": "Asarayja NUI Tools · <a href=\"https://github.com/asarayja/asarayja-nui-tools-releases\">Випуски та звіти на GitHub</a> · ліцензія MIT.",
-  "title": "Asarayja NUI Tools — дивіться, редагуйте й будуйте меню NUI для FiveM поза грою"
+  "title": "Asarayja NUI Tools — дивіться, редагуйте й будуйте меню NUI для FiveM поза грою",
+  "lead.redm": "Дивіться, редагуйте й будуйте меню NUI для RedM поза грою. Відкрийте ресурс, побачте його меню таким, яким його малює гра, виправте наживо, звірте з правилами і надішліть на сервер.",
+  "what.p1.redm": "NUI у RedM — це вебсторінка, намальована поверх гри. Зазвичай її видно лише в грі: запустити сервер, під'єднатися, відкрити меню, знайти помилку, відредагувати, перезапустити ресурс, спочатку. Asarayja NUI Tools показує цю сторінку на вашому робочому столі. Він читає Lua ресурсу, знаходить кожен <code>SendNUIMessage</code>, вгадує дані, які надіслала б гра, відповідає на колбеки сторінки й дозволяє редагувати HTML, CSS і JS, поки меню на екрані.",
+  "title.redm": "Asarayja NUI Tools — дивіться, редагуйте й будуйте меню NUI для RedM поза грою",
+  "totop": "Нагору"
  },
  "ro": {
   "theme.auto": "Auto",
@@ -1296,15 +1346,22 @@ const S = {
   "r6.b": "Locale",
   "r6.p": "Tot textul pe care îl vede jucătorul vine din fișiere de limbă; comentariile în engleză.",
   "footer": "Asarayja NUI Tools · <a href=\"https://github.com/asarayja/asarayja-nui-tools-releases\">Versiuni și raportări pe GitHub</a> · licență MIT.",
-  "title": "Asarayja NUI Tools – vezi, editează și construiește meniuri NUI pentru FiveM în afara jocului"
+  "title": "Asarayja NUI Tools – vezi, editează și construiește meniuri NUI pentru FiveM în afara jocului",
+  "lead.redm": "Vezi, editează și construiește meniuri NUI pentru RedM în afara jocului. Deschide o resursă, privește-i meniul așa cum îl desenează jocul, repară-l pe viu, verifică-l față de reguli și trimite-l pe server.",
+  "what.p1.redm": "Un NUI de RedM este o pagină web desenată peste joc. De obicei o vezi doar în joc: pornești serverul, te conectezi, deschizi meniul, găsești eroarea, editezi, repornești resursa, de la capăt. Asarayja NUI Tools arată acea pagină pe desktopul tău. Citește Lua-ul resursei, găsește fiecare <code>SendNUIMessage</code>, ghicește datele pe care le-ar trimite jocul, răspunde la callback-urile paginii și te lasă să editezi HTML, CSS și JS cât timp meniul e pe ecran.",
+  "title.redm": "Asarayja NUI Tools – vezi, editează și construiește meniuri NUI pentru RedM în afara jocului",
+  "totop": "Înapoi sus"
  }
-};
+};;
 
 const root = document.documentElement;
 const nodes = [...document.querySelectorAll('[data-t]')];
 const english = new Map(nodes.map(el => [el, el.innerHTML]));
 const phNodes = [...document.querySelectorAll('[data-t-ph]')];
 const englishPh = new Map(phNodes.map(el => [el, el.placeholder]));
+// Titles that are tooltips rather than text (the back-to-top button).
+const titleNodes = [...document.querySelectorAll('[data-t-title]')];
+const englishTitles = new Map(titleNodes.map(el => [el, el.title]));
 const englishTitle = document.title;
 
 function setLang(l) {
@@ -1312,7 +1369,10 @@ function setLang(l) {
   const s = S[l] || {};
   for (const el of nodes) el.innerHTML = s[el.dataset.t] || english.get(el);
   for (const el of phNodes) el.placeholder = s[el.dataset.tPh] || englishPh.get(el);
-  document.title = s.title || englishTitle;
+  for (const el of titleNodes) { const v = s[el.dataset.tTitle] || englishTitles.get(el); el.title = v; el.setAttribute('aria-label', v); }
+  // The tab title names the game the reader picked, like everything else on the page.
+  const redm = root.getAttribute('data-ui-game') === 'redm';
+  document.title = (redm && (s['title.redm'] || englishTitle.replace(/FiveM/g, 'RedM'))) || s.title || englishTitle;
   root.lang = l === 'no' ? 'nb' : l;
   document.getElementById('lang').value = l;
   try { localStorage.setItem('lang', l); } catch (e) { /* private mode */ }
@@ -1345,6 +1405,7 @@ function setGameView(g) {
   root.setAttribute('data-ui-game', g);
   try { localStorage.setItem('game', g); } catch (e) { /* private mode */ }
   document.querySelectorAll('.theme.game button').forEach(b => b.classList.toggle('on', b.dataset.g === g));
+  if (typeof setLang === 'function') setLang(document.getElementById('lang').value);
   if (typeof spy === 'function') spy();
 }
 document.querySelectorAll('.theme.game button').forEach(b => b.addEventListener('click', () => setGameView(b.dataset.g)));
@@ -1369,7 +1430,10 @@ find.addEventListener('input', () => {
   if (words.length && links.every(a => a.hidden)) links.forEach(a => { a.hidden = false; });
 });
 find.addEventListener('keydown', e => { if (e.key === 'Escape') { find.value = ''; find.dispatchEvent(new Event('input')); } if (e.key === 'Enter') { const hit = links.find(a => !a.hidden); if (hit) hit.click(); } });
-addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
+const toTop = document.getElementById('totop');
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+const toTopSpy = () => toTop.classList.toggle('on', window.scrollY > 400);
+addEventListener('scroll', () => { toTopSpy(); if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
 addEventListener('resize', spy);
 // setGameView hides the sections that belong to the other game, and the marker only counts
 // the visible ones - so the game is picked first and the marker runs after it. Calling
