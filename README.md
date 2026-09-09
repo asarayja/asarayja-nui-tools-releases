@@ -23,11 +23,18 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
   without `cb()`, missing `onResourceStop`, files not in `fxmanifest`, missing cache busters, hardcoded Norwegian,
   locale files that disagree, items without an image. A finding opens the editor at the line; the AI can be asked to fix.
 - **Deploy** (`Ctrl+D`) – copy the resource to the server and `ensure` it over RCON (⚙ → Server): a local folder, or a
-  server over SFTP (password or private key) or FTP/FTPS.
+  server over SFTP (password or private key) or FTP/FTPS. The copy that was there is kept as
+  `.<name>.bak` beside it, and one button in the settings puts it back.
 - **Server** – a file explorer against the SFTP/FTP servers (FileZilla-style): this machine on the left, the
   server on the right, a folder tree above each list. Fetch a resource, edit it here, send it back (or "Send
   <resource> here" for the open one); drag between the panes or drop files from the desktop. A file that exists
   asks: overwrite, only if newer, skip, cancel, with "do the same with the rest". Nothing on the server is deleted.
+- **RedM** – pick the game in the first run, under ⚙ → Appearance or with `Ctrl+G`, and the app
+  follows: the templates you are offered (NUI menu, Node-built NUI, without NUI, inventory,
+  clothing, loading screen, in a western look), the manifest they get (`game 'rdr3'` and the
+  mandatory `rdr3_warning`), and a bridge that speaks both VORP and RSG Core so one script runs
+  on either. No ox_lib is used, since VORP servers do not ship it. Recently opened shows the
+  scripts for the game you are in, and switching games parks the one you had open.
 - **Several servers** under ⚙ → Server, each with a name and a role (production / dev). With nothing connected
   the explorer asks which one; production is marked red and asks before anything is sent there, Deploy included.
 - **Screen** – show the page at 1366×768 … 5120×1440, scaled to fit, to check 21:9 and 32:9 layouts.

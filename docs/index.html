@@ -155,7 +155,8 @@
       <section id="scenes">
         <h2 data-t="s4.b">Show a scene</h2>
         <p data-t="s4.p">On the <em>Scenes</em> tab every message Lua can send is a button. <em>Show</em> sends it to the page. Open a scene to edit its data before sending. Lists the game fills at runtime are guessed from the script's config; a recorder resource can capture real data in game.</p>
-        <figure><img src="img/main.png" alt="The main window"><figcaption data-t="fig.main">The panel on the left, the menu on the right, drawn exactly as the game would. Each scene is one message from Lua.</figcaption></figure>
+        <figure data-game="fivem"><img src="img/main.png" alt="The main window"><figcaption data-t="fig.main">The panel on the left, the menu on the right, drawn exactly as the game would. Each scene is one message from Lua.</figcaption></figure>
+        <figure data-game="redm"><img src="img/main-redm.png" alt="The main window, RedM"><figcaption data-t="fig.main">The panel on the left, the menu on the right, drawn exactly as the game would. Each scene is one message from Lua.</figcaption></figure>
       </section>
 
       <section id="editor">
@@ -180,7 +181,8 @@
         <h2 data-t="c5.b">Templates</h2>
         <p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in five languages from the start.</p>
         <p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in five languages from the start.</p>
-        <figure class="half"><img src="img/newscript.png" alt="New script"><figcaption data-t="fig.new">New script: pick a template, a framework and a name, and the folder is ready with locales, config and English comments.</figcaption></figure>
+        <figure class="half" data-game="fivem"><img src="img/newscript.png" alt="New script"><figcaption data-t="fig.new">New script: pick a template, a framework and a name, and the folder is ready with locales, config and English comments.</figcaption></figure>
+        <figure class="half" data-game="redm"><img src="img/newscript-redm.png" alt="New script, RedM"><figcaption data-t="fig.new.redm">The same dialog on RedM: the templates that fit the game, and VORP or RSG as the framework.</figcaption></figure>
       </section>
 
       <section id="server">
@@ -198,8 +200,10 @@
           <div class="card"><b data-t="redm.c3.b">No ox_lib</b><p data-t="redm.c3.p">RSG servers run ox_lib, VORP servers do not. The templates stay off it and go through the bridge instead, so the same script works on both.</p></div>
           <div class="card"><b data-t="redm.c4.b">A western page</b><p data-t="redm.c4.p">The RedM menu template is cream paper on ink with an engraved frame and a serif face. Rockstar's fonts are not shipped; a server that runs vorp_menu can point at its own.</p></div>
           <div class="card"><b data-t="redm.c5.b">What is FiveM only</b><p data-t="redm.c5.p">The phone apps, the inventory and the clothing menu templates stay on FiveM: RedM dresses a ped with MetaPed natives and has no LB Phone or NPWD.</p></div>
+          <div class="card"><b data-t="redm.c7.b">Weight from the inventory</b><p data-t="redm.c7.p">The inventory template can take the kilos and the capacity from vorp_inventory or rsg-inventory, so the number matches what the player sees in game. The stash stays yours.</p></div>
           <div class="card"><b data-t="redm.c6.b">Menus from other resources</b><p data-t="redm.c6.p">Many VORP scripts have no page of their own and open vorp_menu instead. Those show nothing here; a script with its own NUI works like any FiveM one.</p></div>
         </div>
+        <figure><img src="img/clothes-redm.png" alt="The RedM clothing menu"><figcaption data-t="fig.clothes.redm">The clothing template: categories from the catalogue the resource ships, prices, dye, and the ped beside the panel. RedM has no native that lists what exists, so the catalogue is yours to fill.</figcaption></figure>
       </section>
 
       <section id="keys">
@@ -247,6 +251,10 @@ const LANGS = { en: 'English', no: 'Norsk', sv: 'Svenska', da: 'Dansk', de: 'Deu
 const S = {
   no: {
     'theme.auto': 'Auto',
+    'fig.new.redm': 'Samme dialog på RedM: malene som passer spillet, og VORP eller RSG som rammeverk.',
+    'fig.clothes.redm': 'Klesmalen: kategorier fra katalogen ressursen leverer, priser, farge, og peden ved siden av panelet. RedM har ingen native som lister hva som finnes, så katalogen fyller du selv.',
+    'redm.c7.b': 'Vekt fra inventaret',
+    'redm.c7.p': 'Inventarmalen kan hente kilo og kapasitet fra vorp_inventory eller rsg-inventory, så tallet stemmer med det spilleren ser i spillet. Stashen er fortsatt din egen.',
     'redm.h': 'RedM: VORP og RSG',
     'redm.intro': 'RedM virker på samme måte: sida er den samme CEF-flata, så alt her gjelder. Det som er annerledes er Lua-en rundt, og den har sin egen del lenger nede.',
     'redm.p1': 'Velg RedM i innstillingene, med <kbd>Ctrl</kbd>+<kbd>G</kbd> eller på knappen øverst, så følger resten med: malene du får, manifestet de får, rammeverket broen snakker med, og lista over script du har åpnet før.',
@@ -311,6 +319,10 @@ const S = {
   },
   sv: {
     'theme.auto': 'Auto',
+    'fig.new.redm': 'Samma dialog på RedM: mallarna som passar spelet, och VORP eller RSG som ramverk.',
+    'fig.clothes.redm': 'Klädmallen: kategorier från katalogen resursen levererar, priser, färg, och peden bredvid panelen. RedM har ingen native som listar vad som finns, så katalogen fyller du själv.',
+    'redm.c7.b': 'Vikt från inventariet',
+    'redm.c7.p': 'Inventariemallen kan hämta kilo och kapacitet från vorp_inventory eller rsg-inventory, så siffran stämmer med spelet. Förrådet är fortfarande ditt eget.',
     'redm.h': 'RedM: VORP och RSG',
     'redm.intro': 'RedM fungerar likadant: sidan är samma CEF-yta, så allt här gäller. Det som skiljer är Lua-koden runt omkring, och den har en egen del längre ner.',
     'redm.p1': 'Välj RedM i inställningarna, med <kbd>Ctrl</kbd>+<kbd>G</kbd> eller på knappen högst upp, så följer resten med: mallarna du får, manifestet de får, ramverket bryggan pratar med och listan över skript du öppnat tidigare.',
@@ -375,6 +387,10 @@ const S = {
   },
   da: {
     'theme.auto': 'Auto',
+    'fig.new.redm': 'Samme dialog på RedM: skabelonerne der passer til spillet, og VORP eller RSG som framework.',
+    'fig.clothes.redm': 'Tøjskabelonen: kategorier fra kataloget ressourcen leverer, priser, farve, og peden ved siden af panelet. RedM har ingen native der lister hvad der findes, så kataloget fylder du selv.',
+    'redm.c7.b': 'Vægt fra inventaret',
+    'redm.c7.p': 'Inventarskabelonen kan hente kilo og kapacitet fra vorp_inventory eller rsg-inventory, så tallet passer med spillet. Stashen er stadig din egen.',
     'redm.h': 'RedM: VORP og RSG',
     'redm.intro': 'RedM virker på samme måde: siden er den samme CEF-flade, så alt her gælder. Det der er anderledes er Lua-koden rundt om, og den har sin egen del længere nede.',
     'redm.p1': 'Vælg RedM i indstillingerne, med <kbd>Ctrl</kbd>+<kbd>G</kbd> eller på knappen øverst, så følger resten med: skabelonerne du får, manifestet de får, frameworket broen taler med, og listen over scripts du har åbnet før.',
@@ -439,6 +455,10 @@ const S = {
   },
   de: {
     'theme.auto': 'Auto',
+    'fig.new.redm': 'Derselbe Dialog auf RedM: die Vorlagen, die zum Spiel passen, und VORP oder RSG als Framework.',
+    'fig.clothes.redm': 'Die Kleidungsvorlage: Kategorien aus dem Katalog, den die Ressource mitbringt, Preise, Färbung, und der Ped neben dem Panel. RedM hat keine Native, die auflistet, was es gibt - den Katalog füllst du selbst.',
+    'redm.c7.b': 'Gewicht aus dem Inventar',
+    'redm.c7.p': 'Die Inventarvorlage kann Kilo und Kapazität von vorp_inventory oder rsg-inventory holen, damit die Zahl zum Spiel passt. Das Lager bleibt deines.',
     'redm.h': 'RedM: VORP und RSG',
     'redm.intro': 'RedM funktioniert genauso: die Seite ist dieselbe CEF-Fläche, alles hier gilt. Anders ist das Lua drumherum, und dafür gibt es weiter unten einen eigenen Abschnitt.',
     'redm.p1': 'RedM in den Einstellungen wählen, mit <kbd>Strg</kbd>+<kbd>G</kbd> oder über den Knopf oben, und der Rest folgt: die angebotenen Vorlagen, ihr Manifest, das Framework, mit dem die Brücke spricht, und die Liste der zuletzt geöffneten Skripte.',
