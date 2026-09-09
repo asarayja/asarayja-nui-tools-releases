@@ -150,7 +150,7 @@
           <div class="card"><b data-t="c2.b">Editor</b><p data-t="c2.p">CSS applies while you type, HTML and JS on pause. The files as a folder tree, the ones the page really loads marked with a dot.</p></div>
           <div class="card"><b data-t="c3.b">Check</b><p data-t="c3.p">The NUI rules checked by machine: CSS that breaks in game, blocking dialogs, callbacks without <code>cb()</code>, files missing from the manifest, locale files that disagree.</p></div>
           <div class="card"><b data-t="c4.b">AI</b><p data-t="c4.p">Claude Code, Codex, Gemini or a local model, always with the rules as its standing instruction. Screenshots of the menu go with the message; every change can be undone per file.</p></div>
-          <div class="card"><b data-t="c5.b">Templates</b><p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p><p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p></div>
+          <div class="card"><b data-t="c5.b">Templates</b><p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, tabbed app (MDT), HUD, DUI on a surface in the world, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p><p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, tabbed app (MDT), HUD, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p></div>
           <div class="card"><b data-t="c6.b">Server</b><p data-t="c6.p">Deploy with one key, or browse the server like FileZilla: fetch a resource, edit it here, send it back. Production servers are marked red and ask first.</p></div>
           <div class="card"><b data-t="c7.b">Database</b><p data-t="c7.p">The script's own tables, read from its <code>.sql</code> files and from the Lua that makes them at startup, with the rows it ships. Edit a row and every page that reads that table is drawn with it. Kept beside the script; the <code>.sql</code> files are only read.</p></div>
           <div class="card"><b data-t="c8.b">Flow</b><p data-t="c8.p">What the player sees after the click: notifications, progress bars, dialogs and context menus drawn with ox_lib's own page, the eye with ox_target's, and the script's keys pressed with the tool's own. Picking an option plays what the Lua behind it does.</p></div>
@@ -211,8 +211,8 @@
 
       <section id="templates">
         <h2 data-t="c5.b">Templates</h2>
-        <p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p>
-        <p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p>
+        <p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, tabbed app (MDT), HUD, DUI on a surface in the world, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p>
+        <p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, tabbed app (MDT), HUD, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p>
         <figure class="half" data-game="fivem"><img src="img/newscript.png" alt="New script"><figcaption data-t="fig.new">New script: pick a template, a framework and a name, and the folder is ready with locales, config and English comments.</figcaption></figure>
         <figure class="half" data-game="redm"><img src="img/newscript-redm.png" alt="New script, RedM"><figcaption data-t="fig.new.redm">The same dialog on RedM: the templates that fit the game, and VORP or RSG as the framework.</figcaption></figure>
       </section>
@@ -336,7 +336,7 @@ const S = {
   "redm.c5.p": "Telefonappene, inventaret og klesmenyen blir på FiveM: RedM kler en ped med MetaPed-natives og har verken LB Phone eller NPWD.",
   "redm.c6.b": "Menyer fra andre ressurser",
   "redm.c6.p": "Mange VORP-script har ingen egen side og åpner vorp_menu i stedet. De viser ingenting her; et script med egen NUI virker som et hvilket som helst FiveM-script.",
-  "c5.p.redm": "Nytt script fra mal: NUI-meny, Node-bygget NUI, uten NUI og loading screen, i western-stil med bro til VORP og RSG. Locales på elleve språk fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p.redm": "Nytt script fra mal: NUI-meny, fane-app (MDT), HUD, Node-bygget NUI, uten NUI og loading screen, i western-stil med bro til VORP og RSG. Locales på elleve språk fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "r7.b": "RedM i tillegg",
   "r7.p": "rdr3_warning-linja, ingen ox_lib, karakteren som identitet, bildekatalog per inventar, og noen RSG-sider som ikke åpner uten token.",
   "nav.find": "Søk i guiden",
@@ -359,7 +359,7 @@ const S = {
   "c4.b": "AI",
   "c4.p": "Claude Code, Codex, Gemini eller en lokal modell, alltid med reglene som fast instruks. Skjermbilde av menyen følger meldinga; hver endring kan angres per fil.",
   "c5.b": "Maler",
-  "c5.p": "Nytt script fra mal: NUI-meny, inventar, klesmeny, loading screen, LB Phone-, NPWD- og oph3z-telefonapper. Locales på elleve språk fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p": "Nytt script fra mal: NUI-meny, fane-app (MDT), HUD, DUI på en flate i verden, inventar, klesmeny, loading screen, LB Phone-, NPWD- og oph3z-telefonapper. Locales på elleve språk fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "c6.b": "Server",
   "c6.p": "Deploy med én tast, eller bla på serveren som i FileZilla: hent en ressurs, rediger her, send tilbake. Produksjonsservere er merket rødt og spør først.",
   "c7.b": "Database",
@@ -473,7 +473,7 @@ const S = {
   "redm.c5.p": "Telefonapparna, inventariet och klädmenyn stannar i FiveM: RedM klär en ped med MetaPed-natives och har varken LB Phone eller NPWD.",
   "redm.c6.b": "Menyer från andra resurser",
   "redm.c6.p": "Många VORP-skript har ingen egen sida utan öppnar vorp_menu. De visar ingenting här; ett skript med egen NUI fungerar som vilket FiveM-skript som helst.",
-  "c5.p.redm": "Nytt skript från mall: NUI-meny, Node-byggd NUI, utan NUI och laddningsskärm, i westernstil med brygga till VORP och RSG. Locales på elva språk från start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p.redm": "Nytt skript från mall: NUI-meny, flikapp (MDT), HUD, Node-byggd NUI, utan NUI och loading screen, i westernstil med brygga till VORP och RSG. Locales på elva språk från start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "r7.b": "RedM därtill",
   "r7.p": "rdr3_warning-raden, ingen ox_lib, karaktären som identitet, bildkatalog per inventarie, och några RSG-sidor som inte öppnar utan sin token.",
   "nav.find": "Sök i guiden",
@@ -496,7 +496,7 @@ const S = {
   "c4.b": "AI",
   "c4.p": "Claude Code, Codex, Gemini eller en lokal modell, alltid med reglerna som fast instruktion. Skärmbild av menyn följer meddelandet; varje ändring kan ångras per fil.",
   "c5.b": "Mallar",
-  "c5.p": "Nytt script från mall: NUI-meny, inventarie, klädmeny, laddningsskärm, LB Phone-, NPWD- och oph3z-telefonappar. Locales på elva språk från start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p": "Nytt skript från mall: NUI-meny, flikapp (MDT), HUD, DUI på en yta i världen, inventarium, klädmeny, loading screen, LB Phone-, NPWD- och oph3z-telefonappar. Locales på elva språk från start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "c6.b": "Server",
   "c6.p": "Deploy med en tangent, eller bläddra på servern som i FileZilla: hämta en resurs, redigera här, skicka tillbaka. Produktionsservrar är märkta röda och frågar först.",
   "c7.b": "Databas",
@@ -610,7 +610,7 @@ const S = {
   "redm.c5.p": "Telefonapps, inventaret og tøjmenuen bliver på FiveM: RedM klæder en ped med MetaPed-natives og har hverken LB Phone eller NPWD.",
   "redm.c6.b": "Menuer fra andre ressourcer",
   "redm.c6.p": "Mange VORP-scripts har ingen egen side og åbner vorp_menu i stedet. De viser intet her; et script med sin egen NUI virker som ethvert FiveM-script.",
-  "c5.p.redm": "Nyt script fra skabelon: NUI-menu, Node-bygget NUI, uden NUI og loading screen, i westernstil med bro til VORP og RSG. Locales på elleve sprog fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p.redm": "Nyt script fra skabelon: NUI-menu, faneapp (MDT), HUD, Node-bygget NUI, uden NUI og loading screen, i westernstil med bro til VORP og RSG. Locales på elleve sprog fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "r7.b": "RedM oveni",
   "r7.p": "rdr3_warning-linjen, ingen ox_lib, karakteren som identitet, billedkatalog per inventar, og nogle RSG-sider der ikke åbner uden deres token.",
   "nav.find": "Søg i guiden",
@@ -633,7 +633,7 @@ const S = {
   "c4.b": "AI",
   "c4.p": "Claude Code, Codex, Gemini eller en lokal model, altid med reglerne som fast instruks. Skærmbillede af menuen følger beskeden; hver ændring kan fortrydes per fil.",
   "c5.b": "Skabeloner",
-  "c5.p": "Nyt script fra skabelon: NUI-menu, inventar, tøjmenu, loading screen, LB Phone-, NPWD- og oph3z-telefonapps. Locales på elleve sprog fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p": "Nyt script fra skabelon: NUI-menu, faneapp (MDT), HUD, DUI på en flade i verden, inventar, tøjmenu, loading screen, LB Phone-, NPWD- og oph3z-telefonapps. Locales på elleve sprog fra start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "c6.b": "Server",
   "c6.p": "Deploy med én tast, eller gennemse serveren som i FileZilla: hent en ressource, redigér her, send tilbage. Produktionsservere er markeret røde og spørger først.",
   "c7.b": "Database",
@@ -747,7 +747,7 @@ const S = {
   "redm.c5.p": "Die Telefon-Apps, das Inventar und das Kleidungsmenü bleiben bei FiveM: RedM kleidet einen Ped mit MetaPed-Natives und hat weder LB Phone noch NPWD.",
   "redm.c6.b": "Menüs aus anderen Ressourcen",
   "redm.c6.p": "Viele VORP-Skripte haben keine eigene Seite und öffnen stattdessen vorp_menu. Die zeigen hier nichts; ein Skript mit eigener NUI läuft wie jedes FiveM-Skript.",
-  "c5.p.redm": "Neues Skript aus einer Vorlage: NUI-Menü, Node-gebautes NUI, ohne NUI und Ladebildschirm, im Western-Look mit Brücke zu VORP und RSG. Locales in elf Sprachen von Anfang an (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p.redm": "Neues Script aus einer Vorlage: NUI-Menü, Reiter-App (MDT), HUD, mit Node gebautes NUI, ohne NUI und Ladebildschirm, im Western-Look mit VORP- und RSG-Brücke. Locales in elf Sprachen von Anfang an (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "r7.b": "RedM obendrauf",
   "r7.p": "Die rdr3_warning-Zeile, kein ox_lib, der Charakter als Identität, Bildpfade je Inventar, und einige RSG-Seiten, die ohne ihr Token nicht aufgehen.",
   "nav.find": "Im Leitfaden suchen",
@@ -770,7 +770,7 @@ const S = {
   "c4.b": "KI",
   "c4.p": "Claude Code, Codex, Gemini oder ein lokales Modell, immer mit den Regeln als fester Anweisung. Ein Screenshot des Menüs geht mit der Nachricht mit; jede Änderung lässt sich pro Datei rückgängig machen.",
   "c5.b": "Vorlagen",
-  "c5.p": "Neues Skript aus einer Vorlage: NUI-Menü, Inventar, Kleidungsmenü, Ladebildschirm, LB Phone-, NPWD- und oph3z-Telefon-Apps. Locales in elf Sprachen von Anfang an (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p": "Neues Script aus einer Vorlage: NUI-Menü, Reiter-App (MDT), HUD, DUI auf einer Fläche in der Welt, Inventar, Kleidungsmenü, Ladebildschirm, LB-Phone-, NPWD- und oph3z-Apps. Locales in elf Sprachen von Anfang an (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "c6.b": "Server",
   "c6.p": "Deploy mit einer Taste, oder den Server wie in FileZilla durchsuchen: eine Ressource holen, hier bearbeiten, zurückschicken. Produktionsserver sind rot markiert und fragen vorher.",
   "c7.b": "Datenbank",
@@ -884,7 +884,7 @@ const S = {
   "redm.c5.p": "Les applications de téléphone, l'inventaire et le menu de vêtements restent sur FiveM : RedM habille un ped avec les natives MetaPed et n'a ni LB Phone ni NPWD.",
   "redm.c6.b": "Des menus venus d'autres ressources",
   "redm.c6.p": "Beaucoup de scripts VORP n'ont pas de page propre et ouvrent vorp_menu à la place. Ils n'affichent rien ici ; un script avec sa propre NUI marche comme n'importe quel script FiveM.",
-  "c5.p.redm": "Nouveau script depuis un modèle : menu NUI, NUI construite avec Node, sans NUI et écran de chargement, dans un style western avec un pont VORP et RSG. Locales en onze langues dès le départ (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p.redm": "Nouveau script depuis un modèle : menu NUI, application à onglets (MDT), HUD, NUI construit avec Node, sans NUI et écran de chargement, dans un style western avec un pont VORP et RSG. Locales en onze langues dès le départ (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "r7.b": "RedM en plus",
   "r7.p": "La ligne rdr3_warning, pas d'ox_lib, le personnage comme identité, un dossier d'images par inventaire, et certaines pages RSG qui ne s'ouvrent pas sans jeton.",
   "nav.find": "Chercher dans le guide",
@@ -907,7 +907,7 @@ const S = {
   "c4.b": "IA",
   "c4.p": "Claude Code, Codex, Gemini ou un modèle local, toujours avec les règles comme consigne permanente. Une capture du menu accompagne le message ; chaque changement s'annule fichier par fichier.",
   "c5.b": "Modèles",
-  "c5.p": "Nouveau script depuis un modèle : menu NUI, inventaire, menu de vêtements, écran de chargement, applications LB Phone, NPWD et oph3z. Locales en onze langues dès le départ (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p": "Nouveau script depuis un modèle : menu NUI, application à onglets (MDT), HUD, DUI sur une surface du monde, inventaire, menu de vêtements, écran de chargement, applis LB Phone, NPWD et oph3z. Locales en onze langues dès le départ (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "c6.b": "Serveur",
   "c6.p": "Déployez d'une touche, ou parcourez le serveur comme dans FileZilla : récupérez une ressource, modifiez-la ici, renvoyez-la. Les serveurs de production sont marqués en rouge et demandent d'abord.",
   "c7.b": "Base de données",
@@ -1021,7 +1021,7 @@ const S = {
   "redm.c5.p": "De telefoonapps, de inventaris en het kledingmenu blijven op FiveM: RedM kleedt een ped met MetaPed-natives en heeft noch LB Phone noch NPWD.",
   "redm.c6.b": "Menu's uit andere resources",
   "redm.c6.p": "Veel VORP-scripts hebben geen eigen pagina en openen vorp_menu. Die tonen hier niets; een script met een eigen NUI werkt als elk ander FiveM-script.",
-  "c5.p.redm": "Nieuw script uit een sjabloon: NUI-menu, met Node gebouwde NUI, zonder NUI en laadscherm, in een westernstijl met een brug naar VORP en RSG. Locales in elf talen vanaf het begin (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p.redm": "Nieuw script uit een sjabloon: NUI-menu, tabbladapp (MDT), HUD, met Node gebouwde NUI, zonder NUI en laadscherm, in westernstijl met een VORP- en RSG-brug. Locales in elf talen vanaf het begin (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "r7.b": "RedM erbij",
   "r7.p": "De rdr3_warning-regel, geen ox_lib, het personage als identiteit, een map met afbeeldingen per inventaris, en sommige RSG-pagina's die zonder token niet opengaan.",
   "nav.find": "Zoek in de gids",
@@ -1044,7 +1044,7 @@ const S = {
   "c4.b": "AI",
   "c4.p": "Claude Code, Codex, Gemini of een lokaal model, altijd met de regels als vaste instructie. Een schermafbeelding van het menu gaat met het bericht mee; elke wijziging is per bestand ongedaan te maken.",
   "c5.b": "Sjablonen",
-  "c5.p": "Nieuw script uit een sjabloon: NUI-menu, inventaris, kledingmenu, laadscherm, LB Phone-, NPWD- en oph3z-telefoonapps. Locales in elf talen vanaf het begin (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p": "Nieuw script uit een sjabloon: NUI-menu, tabbladapp (MDT), HUD, DUI op een vlak in de wereld, inventaris, kledingmenu, laadscherm, LB Phone-, NPWD- en oph3z-telefoonapps. Locales in elf talen vanaf het begin (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "c6.b": "Server",
   "c6.p": "Deploy met één toets, of blader over de server als in FileZilla: haal een resource op, bewerk hem hier, stuur hem terug. Productieservers zijn rood gemarkeerd en vragen eerst.",
   "c7.b": "Database",
@@ -1158,7 +1158,7 @@ const S = {
   "redm.c5.p": "Las aplicaciones de teléfono, el inventario y el menú de ropa se quedan en FiveM: RedM viste un ped con las natives de MetaPed y no tiene ni LB Phone ni NPWD.",
   "redm.c6.b": "Menús de otros recursos",
   "redm.c6.p": "Muchos scripts de VORP no tienen página propia y abren vorp_menu. Aquí no muestran nada; un script con su propia NUI funciona como cualquier script de FiveM.",
-  "c5.p.redm": "Nuevo script desde una plantilla: menú NUI, NUI construida con Node, sin NUI y pantalla de carga, con estética western y un puente a VORP y RSG. Locales en once idiomas desde el principio (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p.redm": "Script nuevo desde una plantilla: menú NUI, app con pestañas (MDT), HUD, NUI construido con Node, sin NUI y pantalla de carga, con estética western y puente a VORP y RSG. Locales en once idiomas desde el principio (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "r7.b": "RedM además",
   "r7.p": "La línea rdr3_warning, sin ox_lib, el personaje como identidad, una carpeta de imágenes por inventario, y algunas páginas de RSG que no abren sin token.",
   "nav.find": "Buscar en la guía",
@@ -1181,7 +1181,7 @@ const S = {
   "c4.b": "IA",
   "c4.p": "Claude Code, Codex, Gemini o un modelo local, siempre con las reglas como instrucción permanente. Una captura del menú acompaña al mensaje; cada cambio se deshace por archivo.",
   "c5.b": "Plantillas",
-  "c5.p": "Nuevo script desde una plantilla: menú NUI, inventario, menú de ropa, pantalla de carga, aplicaciones de teléfono LB Phone, NPWD y oph3z. Locales en once idiomas desde el principio (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p": "Script nuevo desde una plantilla: menú NUI, app con pestañas (MDT), HUD, DUI sobre una superficie del mundo, inventario, menú de ropa, pantalla de carga, apps de LB Phone, NPWD y oph3z. Locales en once idiomas desde el principio (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "c6.b": "Servidor",
   "c6.p": "Despliega con una tecla, o navega por el servidor como en FileZilla: trae un recurso, edítalo aquí, devuélvelo. Los servidores de producción están marcados en rojo y preguntan primero.",
   "c7.b": "Base de datos",
@@ -1295,7 +1295,7 @@ const S = {
   "redm.c5.p": "Aplikacje telefoniczne, ekwipunek i menu ubrań zostają na FiveM: RedM ubiera peda nativami MetaPed i nie ma ani LB Phone, ani NPWD.",
   "redm.c6.b": "Menu z innych zasobów",
   "redm.c6.p": "Wiele skryptów VORP nie ma własnej strony i otwiera vorp_menu. Tutaj nic nie pokazują; skrypt z własnym NUI działa jak każdy skrypt FiveM.",
-  "c5.p.redm": "Nowy skrypt z szablonu: menu NUI, NUI budowane Node'em, bez NUI i ekran ładowania, w stylu western z mostem do VORP i RSG. Locale w jedenastu językach od początku (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p.redm": "Nowy skrypt z szablonu: menu NUI, aplikacja z zakładkami (MDT), HUD, NUI budowane Node, bez NUI i ekran ładowania, w stylu western z mostem do VORP i RSG. Locales w jedenastu językach od startu (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "r7.b": "RedM dodatkowo",
   "r7.p": "Linia rdr3_warning, brak ox_lib, postać jako tożsamość, katalog obrazków na każdy ekwipunek i kilka stron RSG, które nie otworzą się bez tokena.",
   "nav.find": "Szukaj w przewodniku",
@@ -1318,7 +1318,7 @@ const S = {
   "c4.b": "AI",
   "c4.p": "Claude Code, Codex, Gemini albo model lokalny, zawsze z regułami jako stałą instrukcją. Zrzut menu idzie razem z wiadomością; każdą zmianę można cofnąć osobno na plik.",
   "c5.b": "Szablony",
-  "c5.p": "Nowy skrypt z szablonu: menu NUI, ekwipunek, menu ubrań, ekran ładowania, aplikacje telefoniczne LB Phone, NPWD i oph3z. Locale w jedenastu językach od początku (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p": "Nowy skrypt z szablonu: menu NUI, aplikacja z zakładkami (MDT), HUD, DUI na powierzchni w świecie, ekwipunek, menu ubrań, ekran ładowania, aplikacje LB Phone, NPWD i oph3z. Locales w jedenastu językach od startu (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "c6.b": "Serwer",
   "c6.p": "Wdrażaj jednym klawiszem albo przeglądaj serwer jak w FileZilli: pobierz zasób, edytuj tutaj, odeślij. Serwery produkcyjne są oznaczone na czerwono i pytają najpierw.",
   "c7.b": "Baza danych",
@@ -1432,7 +1432,7 @@ const S = {
   "redm.c5.p": "Телефонні застосунки, інвентар і меню одягу лишаються на FiveM: RedM вдягає педа нативами MetaPed і не має ні LB Phone, ні NPWD.",
   "redm.c6.b": "Меню з інших ресурсів",
   "redm.c6.p": "Багато скриптів VORP не мають власної сторінки й натомість відкривають vorp_menu. Тут вони нічого не показують; скрипт із власним NUI працює як будь-який скрипт FiveM.",
-  "c5.p.redm": "Новий скрипт із шаблону: меню NUI, зібраний Node-ом NUI, без NUI та екран завантаження, у вестерн-стилі з мостом до VORP і RSG. Локалі одинадцятьма мовами від початку (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p.redm": "Новий скрипт із шаблону: меню NUI, застосунок із вкладками (MDT), HUD, зібраний Node NUI, без NUI і екран завантаження, у вестерн-стилі з мостом до VORP і RSG. Локалі одинадцятьма мовами з самого початку (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "r7.b": "RedM додатково",
   "r7.p": "Рядок rdr3_warning, без ox_lib, персонаж як ідентичність, тека зображень на кожен інвентар і кілька сторінок RSG, що не відкриваються без токена.",
   "nav.find": "Пошук у посібнику",
@@ -1455,7 +1455,7 @@ const S = {
   "c4.b": "ШІ",
   "c4.p": "Claude Code, Codex, Gemini або локальна модель, завжди з правилами як сталою настановою. Знімок меню йде разом із повідомленням; кожну зміну можна скасувати окремо на файл.",
   "c5.b": "Шаблони",
-  "c5.p": "Новий скрипт із шаблону: меню NUI, інвентар, меню одягу, екран завантаження, телефонні застосунки LB Phone, NPWD і oph3z. Локалі одинадцятьма мовами від початку (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p": "Новий скрипт із шаблону: меню NUI, застосунок із вкладками (MDT), HUD, DUI на поверхні у світі, інвентар, меню одягу, екран завантаження, застосунки для LB Phone, NPWD і oph3z. Локалі одинадцятьма мовами з самого початку (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "c6.b": "Сервер",
   "c6.p": "Розгортайте однією клавішею або гортайте сервер, як у FileZilla: заберіть ресурс, відредагуйте тут, надішліть назад. Продакшн-сервери позначені червоним і питають першими.",
   "c7.b": "База даних",
@@ -1569,7 +1569,7 @@ const S = {
   "redm.c5.p": "Aplicațiile de telefon, inventarul și meniul de haine rămân pe FiveM: RedM îmbracă un ped cu nativele MetaPed și nu are nici LB Phone, nici NPWD.",
   "redm.c6.b": "Meniuri din alte resurse",
   "redm.c6.p": "Multe scripturi VORP nu au pagină proprie și deschid vorp_menu. Aici nu arată nimic; un script cu NUI propriu merge ca orice script FiveM.",
-  "c5.p.redm": "Script nou dintr-un șablon: meniu NUI, NUI construit cu Node, fără NUI și ecran de încărcare, în stil western cu punte către VORP și RSG. Locale în unsprezece limbi de la început (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p.redm": "Script nou dintr-un șablon: meniu NUI, aplicație cu file (MDT), HUD, NUI construit cu Node, fără NUI și ecran de încărcare, în stil western cu punte spre VORP și RSG. Locale în unsprezece limbi de la început (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "r7.b": "RedM în plus",
   "r7.p": "Linia rdr3_warning, fără ox_lib, personajul ca identitate, un dosar de imagini per inventar, și câteva pagini RSG care nu se deschid fără token.",
   "nav.find": "Caută în ghid",
@@ -1592,7 +1592,7 @@ const S = {
   "c4.b": "IA",
   "c4.p": "Claude Code, Codex, Gemini sau un model local, mereu cu regulile ca instrucțiune permanentă. O captură a meniului însoțește mesajul; fiecare modificare se poate anula per fișier.",
   "c5.b": "Șabloane",
-  "c5.p": "Script nou dintr-un șablon: meniu NUI, inventar, meniu de haine, ecran de încărcare, aplicații de telefon LB Phone, NPWD și oph3z. Locale în unsprezece limbi de la început (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
+  "c5.p": "Script nou dintr-un șablon: meniu NUI, aplicație cu file (MDT), HUD, DUI pe o suprafață din lume, inventar, meniu de haine, ecran de încărcare, aplicații LB Phone, NPWD și oph3z. Locale în unsprezece limbi de la început (no, en, sv, da, de, fr, nl, es, pl, uk, ro).",
   "c6.b": "Server",
   "c6.p": "Implementează cu o tastă, sau răsfoiește serverul ca în FileZilla: adu o resursă, editeaz-o aici, trimite-o înapoi. Serverele de producție sunt marcate cu roșu și întreabă întâi.",
   "c7.b": "Bază de date",
