@@ -7,8 +7,11 @@
 <meta name="description" content="Asarayja NUI Tools opens any FiveM resource and shows its NUI the way the game would. Edit live, check the rules, let the AI fix things, deploy to the server.">
 <link rel="icon" href="logo.png">
 <style>
-  :root { --bg:#f6f5fa; --surface:#fff; --text:#1f1d2b; --muted:#6b6880; --line:#e3e1ec; --accent:#6d3fd6; --accent-2:#d92b23; --ok:#2e7d32; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#14131a; --surface:#1e1c27; --text:#eceaf4; --muted:#9a97ad; --line:#2d2a3a; } }
+  :root { color-scheme:light; --bg:#f6f5fa; --surface:#fff; --text:#1f1d2b; --muted:#6b6880; --line:#e3e1ec; --accent:#6d3fd6; --accent-2:#d92b23; --ok:#2e7d32; --shadow:rgba(0,0,0,.12); --shot:#cfd5de; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { color-scheme:dark; --bg:#14131a; --surface:#1e1c27; --text:#eceaf4; --muted:#9a97ad; --line:#2d2a3a; --accent:#8b63ea; --accent-2:#ff6b60; --ok:#67c06c; --shadow:rgba(0,0,0,.5); --shot:#232030; }
+  }
+  :root[data-theme="dark"] { color-scheme:dark; --bg:#14131a; --surface:#1e1c27; --text:#eceaf4; --muted:#9a97ad; --line:#2d2a3a; --accent:#8b63ea; --accent-2:#ff6b60; --ok:#67c06c; --shadow:rgba(0,0,0,.5); --shot:#232030; }
   * { box-sizing:border-box; }
   body { margin:0; font:15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--text); }
   a { color:var(--accent); }
@@ -16,10 +19,12 @@
   header.top { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); }
   header.top img { width:36px; height:36px; border-radius:9px; }
   header.top b { flex:1; font-size:16px; }
-  .lang button { background:transparent; border:1px solid var(--line); color:var(--muted); border-radius:6px; padding:4px 10px; cursor:pointer; font:inherit; font-size:13px; }
-  .lang button.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .lang button, .theme button { background:transparent; border:1px solid var(--line); color:var(--muted); border-radius:6px; padding:4px 10px; cursor:pointer; font:inherit; font-size:13px; }
+  .lang button.on, .theme button.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .theme { margin-left:10px; padding-left:10px; border-left:1px solid var(--line); }
+  .theme button { padding:4px 8px; }
   .hero { text-align:center; padding:56px 0 34px; }
-  .hero img { width:96px; height:96px; border-radius:22px; box-shadow:0 8px 30px rgba(0,0,0,.18); }
+  .hero img { width:96px; height:96px; border-radius:22px; box-shadow:0 8px 30px var(--shadow); }
   .hero h1 { font-size:38px; margin:18px 0 8px; letter-spacing:-.5px; }
   .hero p.lead { font-size:19px; color:var(--muted); max-width:640px; margin:0 auto 26px; }
   .dl { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
@@ -35,7 +40,7 @@
   .card b { display:block; margin-bottom:4px; }
   .card p { color:var(--muted); margin:0; font-size:14px; }
   figure { margin:0 0 26px; }
-  figure img { width:100%; height:auto; border-radius:12px; border:1px solid var(--line); box-shadow:0 6px 24px rgba(0,0,0,.12); background:#cfd5de; }
+  figure img { width:100%; height:auto; border-radius:12px; border:1px solid var(--line); box-shadow:0 6px 24px var(--shadow); background:var(--shot); }
   figure.half img { max-width:520px; display:block; margin:0 auto; }
   figcaption { color:var(--muted); font-size:14px; margin-top:8px; text-align:center; }
   ol.steps { padding-left:0; list-style:none; counter-reset:s; }
@@ -60,6 +65,7 @@
   <header class="top">
     <img src="logo.png" alt=""><b>Asarayja NUI Tools</b>
     <span class="lang"><button data-set="en">English</button> <button data-set="no">Norsk</button></span>
+    <span class="theme"><button data-theme="auto" title="Follow the system">Auto</button><button data-theme="light" title="Light">☀</button><button data-theme="dark" title="Dark">☾</button></span>
   </header>
 
   <!-- ─────────────────────────────── English ─────────────────────────────── -->
@@ -237,6 +243,16 @@
   let start = 'en'; try { start = localStorage.getItem('lang') || (/^(nb|nn|no)/i.test(navigator.language) ? 'no' : 'en'); } catch (e) { /* private mode */ }
   if (/[?&]lang=no/.test(location.search)) start = 'no'; if (/[?&]lang=en/.test(location.search)) start = 'en';
   setLang(start);
+  // Light or dark: the system decides until the reader picks one; the choice is remembered.
+  function setTheme(v) {
+    if (v === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', v);
+    try { localStorage.setItem('theme', v); } catch (e) { /* private mode */ }
+    document.querySelectorAll('.theme button').forEach(b => b.classList.toggle('on', b.dataset.theme === v));
+  }
+  document.querySelectorAll('.theme button').forEach(b => b.addEventListener('click', () => setTheme(b.dataset.theme)));
+  let theme = 'auto'; try { theme = localStorage.getItem('theme') || 'auto'; } catch (e) { /* private mode */ }
+  setTheme(theme);
+
   // The anchor from the app ("#start") lands on the Norwegian steps too.
   if (location.hash === '#start' && start === 'no') setTimeout(() => document.getElementById('start-no').scrollIntoView(), 50);
 </script>
