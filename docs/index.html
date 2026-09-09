@@ -184,7 +184,8 @@
           <tr><th><kbd>Ctrl</kbd>+<kbd>E</kbd></th><td data-t="k.editor">Open and close the editor</td></tr>
           <tr><th><kbd>Ctrl</kbd>+<kbd>S</kbd></th><td data-t="k.save">Save the file in the editor</td></tr>
           <tr><th><kbd>Ctrl</kbd>+<kbd>D</kbd></th><td data-t="k.deploy">Deploy the open resource</td></tr>
-          <tr><th><kbd>Ctrl</kbd>+<kbd>,</kbd></th><td data-t="k.settings">Settings</td></tr>
+          <tr><th><kbd>Ctrl</kbd>+<kbd>G</kbd></th><td data-t="k.game">Switch between FiveM and RedM</td></tr>
+      <tr><th><kbd>Ctrl</kbd>+<kbd>,</kbd></th><td data-t="k.settings">Settings</td></tr>
           <tr><th><kbd>Ctrl</kbd>+<kbd>Tab</kbd></th><td data-t="k.tab">Switch between the scripts the AI touched (workspace)</td></tr>
           <tr><th><kbd>Alt</kbd>+<kbd>Enter</kbd></th><td data-t="k.send">Send the message on the AI tab</td></tr>
           <tr><th><kbd>F1</kbd></th><td data-t="k.help">This page</td></tr>
@@ -253,7 +254,7 @@ const S = {
     's8.b': 'Send til serveren', 's8.p': 'Under <kbd>⚙</kbd> → <em>Server</em> legger du inn serverne dine: lokal mappe, SFTP eller FTP, hver med navn og rolle (<span class="prod">produksjon</span> eller <span class="dev">dev</span>). <em>Deploy</em> (<kbd>Ctrl</kbd>+<kbd>D</kbd>) bytter ut ressursen på serveren og restarter den over RCON. <em>Server</em> åpner filutforskeren for alt annet.',
     'start.note': 'Gikk noe galt? <kbd>⚙</kbd> → <em>Oppdateringer</em> viser hvor loggfila ligger; de siste 200 linjene er det en feilrapport trenger. Krasjet appen, tilbyr en stripe øverst å kopiere dem.',
     'keys.h': 'Tastatur',
-    'k.editor': 'Åpne og lukke editoren', 'k.save': 'Lagre fila i editoren', 'k.deploy': 'Deploy av den åpne ressursen', 'k.settings': 'Innstillinger',
+    'k.game': 'Bytt mellom FiveM og RedM', 'k.editor': 'Åpne og lukke editoren', 'k.save': 'Lagre fila i editoren', 'k.deploy': 'Deploy av den åpne ressursen', 'k.settings': 'Innstillinger',
     'k.tab': 'Bytt mellom scriptene AI-en har rørt (mappe med mange script)', 'k.send': 'Send meldinga på AI-fanen', 'k.help': 'Denne sida', 'k.esc': 'Lukk en dialog',
     'rules.h': 'Reglene, kort', 'rules.p': 'Sjekken og AI-en følger ett regelsett, skrevet ut fra det som faktisk har gått galt i ekte script. Kjernen:',
     'r1.b': 'Lua eier fokus', 'r1.p': 'Lua åpner og lukker menyen; Escape i sida sender <code>close</code> til Lua; <code>onResourceStop</code> slipper fokus.',
@@ -299,7 +300,7 @@ const S = {
     's8.b': 'Skicka till servern', 's8.p': 'Under <kbd>⚙</kbd> → <em>Server</em> lägger du in dina servrar: lokal mapp, SFTP eller FTP, var och en med namn och roll (<span class="prod">produktion</span> eller <span class="dev">dev</span>). <em>Deploy</em> (<kbd>Ctrl</kbd>+<kbd>D</kbd>) byter ut resursen på servern och startar om den över RCON. <em>Server</em> öppnar filutforskaren för allt annat.',
     'start.note': 'Gick något fel? <kbd>⚙</kbd> → <em>Uppdateringar</em> visar var loggfilen ligger; de sista 200 raderna är vad en felrapport behöver. Kraschade appen erbjuder en rad högst upp att kopiera dem.',
     'keys.h': 'Tangentbord',
-    'k.editor': 'Öppna och stänga editorn', 'k.save': 'Spara filen i editorn', 'k.deploy': 'Deploy av den öppna resursen', 'k.settings': 'Inställningar',
+    'k.game': 'Växla mellan FiveM och RedM', 'k.editor': 'Öppna och stänga editorn', 'k.save': 'Spara filen i editorn', 'k.deploy': 'Deploy av den öppna resursen', 'k.settings': 'Inställningar',
     'k.tab': 'Växla mellan de script AI:n rört (mapp med många script)', 'k.send': 'Skicka meddelandet på AI-fliken', 'k.help': 'Den här sidan', 'k.esc': 'Stäng en dialog',
     'rules.h': 'Reglerna, kort', 'rules.p': 'Kontrollen och AI:n följer ett regelverk, skrivet utifrån det som faktiskt gått fel i riktiga script. Kärnan:',
     'r1.b': 'Lua äger fokus', 'r1.p': 'Lua öppnar och stänger menyn; Escape i sidan skickar <code>close</code> till Lua; <code>onResourceStop</code> släpper fokus.',
@@ -345,7 +346,7 @@ const S = {
     's8.b': 'Send til serveren', 's8.p': 'Under <kbd>⚙</kbd> → <em>Server</em> lægger du dine servere ind: lokal mappe, SFTP eller FTP, hver med navn og rolle (<span class="prod">produktion</span> eller <span class="dev">dev</span>). <em>Deploy</em> (<kbd>Ctrl</kbd>+<kbd>D</kbd>) udskifter ressourcen på serveren og genstarter den over RCON. <em>Server</em> åbner filstifinderen til alt andet.',
     'start.note': 'Gik noget galt? <kbd>⚙</kbd> → <em>Opdateringer</em> viser hvor logfilen ligger; de sidste 200 linjer er hvad en fejlrapport har brug for. Er appen crashet, tilbyder en bjælke øverst at kopiere dem.',
     'keys.h': 'Tastatur',
-    'k.editor': 'Åbn og luk editoren', 'k.save': 'Gem filen i editoren', 'k.deploy': 'Deploy af den åbne ressource', 'k.settings': 'Indstillinger',
+    'k.game': 'Skift mellem FiveM og RedM', 'k.editor': 'Åbn og luk editoren', 'k.save': 'Gem filen i editoren', 'k.deploy': 'Deploy af den åbne ressource', 'k.settings': 'Indstillinger',
     'k.tab': 'Skift mellem de scripts AI\'en har rørt (mappe med mange scripts)', 'k.send': 'Send beskeden på AI-fanen', 'k.help': 'Denne side', 'k.esc': 'Luk en dialog',
     'rules.h': 'Reglerne, kort', 'rules.p': 'Tjekket og AI\'en følger ét regelsæt, skrevet ud fra det der faktisk er gået galt i rigtige scripts. Kernen:',
     'r1.b': 'Lua ejer fokus', 'r1.p': 'Lua åbner og lukker menuen; Escape i siden sender <code>close</code> til Lua; <code>onResourceStop</code> slipper fokus.',
@@ -391,7 +392,7 @@ const S = {
     's8.b': 'Auf den Server schicken', 's8.p': 'Unter <kbd>⚙</kbd> → <em>Server</em> trägst du deine Server ein: ein lokaler Ordner, SFTP oder FTP, jeder mit Namen und Rolle (<span class="prod">Produktion</span> oder <span class="dev">Dev</span>). <em>Deploy</em> (<kbd>Strg</kbd>+<kbd>D</kbd>) ersetzt die Ressource auf dem Server und startet sie über RCON neu. <em>Server</em> öffnet den Datei-Explorer für alles andere.',
     'start.note': 'Etwas ist schiefgegangen? <kbd>⚙</kbd> → <em>Updates</em> zeigt, wo die Logdatei liegt; die letzten 200 Zeilen sind das, was ein Fehlerbericht braucht. Ist die App abgestürzt, bietet eine Leiste oben an, sie zu kopieren.',
     'keys.h': 'Tastatur',
-    'k.editor': 'Editor öffnen und schließen', 'k.save': 'Die Datei im Editor speichern', 'k.deploy': 'Deploy der offenen Ressource', 'k.settings': 'Einstellungen',
+    'k.game': 'Zwischen FiveM und RedM wechseln', 'k.editor': 'Editor öffnen und schließen', 'k.save': 'Die Datei im Editor speichern', 'k.deploy': 'Deploy der offenen Ressource', 'k.settings': 'Einstellungen',
     'k.tab': 'Zwischen den von der KI berührten Skripten wechseln (Ordner mit vielen Skripten)', 'k.send': 'Die Nachricht im KI-Tab senden', 'k.help': 'Diese Seite', 'k.esc': 'Einen Dialog schließen',
     'rules.h': 'Die Regeln, kurz', 'rules.p': 'Die Prüfung und die KI folgen einem Regelsatz, geschrieben aus dem, was in echten Skripten tatsächlich schiefging. Der Kern:',
     'r1.b': 'Lua besitzt den Fokus', 'r1.p': 'Lua öffnet und schließt das Menü; Escape in der Seite schickt <code>close</code> an Lua; <code>onResourceStop</code> gibt den Fokus frei.',
