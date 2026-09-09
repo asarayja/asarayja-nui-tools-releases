@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asarayja NUI Tools – see, edit and build FiveM NUI menus outside the game</title>
+<meta name="description" content="Asarayja NUI Tools opens any FiveM resource and shows its NUI the way the game would. Edit live, check the rules, let the AI fix things, deploy to the server.">
+<link rel="icon" href="logo.png">
+<style>
+  :root { --bg:#f6f5fa; --surface:#fff; --text:#1f1d2b; --muted:#6b6880; --line:#e3e1ec; --accent:#6d3fd6; --accent-2:#d92b23; --ok:#2e7d32; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#14131a; --surface:#1e1c27; --text:#eceaf4; --muted:#9a97ad; --line:#2d2a3a; } }
+  * { box-sizing:border-box; }
+  body { margin:0; font:15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--text); }
+  a { color:var(--accent); }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 20px; }
+  header.top { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); }
+  header.top img { width:36px; height:36px; border-radius:9px; }
+  header.top b { flex:1; font-size:16px; }
+  .lang button { background:transparent; border:1px solid var(--line); color:var(--muted); border-radius:6px; padding:4px 10px; cursor:pointer; font:inherit; font-size:13px; }
+  .lang button.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .hero { text-align:center; padding:56px 0 34px; }
+  .hero img { width:96px; height:96px; border-radius:22px; box-shadow:0 8px 30px rgba(0,0,0,.18); }
+  .hero h1 { font-size:38px; margin:18px 0 8px; letter-spacing:-.5px; }
+  .hero p.lead { font-size:19px; color:var(--muted); max-width:640px; margin:0 auto 26px; }
+  .dl { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+  .dl a { display:inline-block; padding:11px 18px; border-radius:10px; text-decoration:none; font-weight:600; background:var(--surface); border:1px solid var(--line); color:var(--text); }
+  .dl a.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .dl small { display:block; width:100%; text-align:center; color:var(--muted); margin-top:6px; }
+  section { padding:34px 0; border-top:1px solid var(--line); }
+  h2 { font-size:26px; margin:0 0 14px; letter-spacing:-.3px; }
+  h3 { font-size:17px; margin:22px 0 6px; }
+  p { margin:0 0 12px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
+  .card b { display:block; margin-bottom:4px; }
+  .card p { color:var(--muted); margin:0; font-size:14px; }
+  figure { margin:0 0 26px; }
+  figure img { width:100%; height:auto; border-radius:12px; border:1px solid var(--line); box-shadow:0 6px 24px rgba(0,0,0,.12); background:#cfd5de; }
+  figure.half img { max-width:520px; display:block; margin:0 auto; }
+  figcaption { color:var(--muted); font-size:14px; margin-top:8px; text-align:center; }
+  ol.steps { padding-left:0; list-style:none; counter-reset:s; }
+  ol.steps li { position:relative; padding:0 0 14px 44px; counter-increment:s; }
+  ol.steps li::before { content:counter(s); position:absolute; left:0; top:0; width:30px; height:30px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; }
+  ol.steps li b { display:block; margin-bottom:2px; }
+  ol.steps li p { color:var(--muted); font-size:14px; margin:0; }
+  table { border-collapse:collapse; width:100%; max-width:560px; font-size:14px; }
+  td, th { text-align:left; padding:6px 10px 6px 0; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:500; width:150px; }
+  kbd { font:12px/1 ui-monospace, Menlo, Consolas, monospace; background:var(--surface); border:1px solid var(--line); border-bottom-width:2px; border-radius:5px; padding:3px 6px; white-space:nowrap; }
+  code { font:13px ui-monospace, Menlo, Consolas, monospace; background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:1px 5px; }
+  .note { border-left:3px solid var(--accent); padding:8px 14px; background:var(--surface); border-radius:0 10px 10px 0; color:var(--muted); font-size:14px; }
+  footer { padding:26px 0 40px; color:var(--muted); font-size:13px; border-top:1px solid var(--line); }
+  [data-lang] { display:none; } html[data-ui="en"] [data-lang="en"], html[data-ui="no"] [data-lang="no"] { display:block; }
+  html[data-ui="en"] span[data-lang="en"], html[data-ui="no"] span[data-lang="no"] { display:inline; }
+  .prod { color:var(--accent-2); font-weight:600; } .dev { color:var(--ok); font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <img src="logo.png" alt=""><b>Asarayja NUI Tools</b>
+    <span class="lang"><button data-set="en">English</button> <button data-set="no">Norsk</button></span>
+  </header>
+
+  <!-- ─────────────────────────────── English ─────────────────────────────── -->
+  <div data-lang="en">
+    <div class="hero">
+      <img src="logo.png" alt="">
+      <h1>Asarayja NUI Tools</h1>
+      <p class="lead">See, edit and build FiveM NUI menus outside the game. Open a resource, watch its menu the way the game draws it, fix it live, check it against the rules, and send it to the server.</p>
+      <div class="dl">
+        <a class="primary" href="https://github.com/asarayja/asarayja-nui-tools-releases/releases/latest">Download – latest release</a>
+        <a href="#start">Getting started</a>
+        <a href="https://github.com/asarayja/asarayja-nui-tools-releases/issues">Report a problem</a>
+        <small>Windows installer or portable · Linux AppImage or .deb · the app updates itself afterwards.</small>
+      </div>
+    </div>
+
+    <section>
+      <h2>What it is</h2>
+      <p>A FiveM NUI is a web page drawn over the game. Normally you only see it in game: start the server, join, open the menu, find the bug, edit, restart the resource, repeat. Asarayja NUI Tools shows that page on your desktop instead. It reads the resource's Lua, finds every <code>SendNUIMessage</code>, guesses the data the game would send, answers the page's callbacks, and lets you edit HTML, CSS and JS while the menu is on screen.</p>
+      <p>Around that sits everything that came up while building a server's scripts: templates for new scripts and phone apps, a rule check for the mistakes that only show on the game's transparent surface, an AI tab that works under those rules, Git, and deploy or a file explorer against the server over SFTP or FTP.</p>
+      <div class="grid">
+        <div class="card"><b>Scenes</b><p>Every message Lua can send is a button. Click it and the menu shows that state, filled with data guessed from the script's own config tables.</p></div>
+        <div class="card"><b>Editor</b><p>CSS applies while you type, HTML and JS on pause. The files as a folder tree, the ones the page really loads marked with a dot.</p></div>
+        <div class="card"><b>Check</b><p>The NUI rules checked by machine: CSS that breaks in game, blocking dialogs, callbacks without <code>cb()</code>, files missing from the manifest, locale files that disagree.</p></div>
+        <div class="card"><b>AI</b><p>Claude Code, Codex, Gemini or a local model, always with the rules as its standing instruction. Screenshots of the menu go with the message; every change can be undone per file.</p></div>
+        <div class="card"><b>Templates</b><p>New script from a template: NUI menu, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in five languages from the start.</p></div>
+        <div class="card"><b>Server</b><p>Deploy with one key, or browse the server like FileZilla: fetch a resource, edit it here, send it back. Production servers are marked red and ask first.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>A look around</h2>
+      <figure><img src="img/main.png" alt="The main window: the panel with scenes on the left, the inventory menu on the right"><figcaption>The panel on the left, the menu on the right, drawn exactly as the game would. Each scene is one message from Lua.</figcaption></figure>
+      <figure><img src="img/editor.png" alt="The editor open beside the menu"><figcaption>The editor (<kbd>Ctrl</kbd>+<kbd>E</kbd>) beside the menu. CSS changes show at once.</figcaption></figure>
+      <figure><img src="img/check.png" alt="The Check tab"><figcaption>Check: the rules run on the resource. A finding opens the editor at the line; the AI can be asked to fix it.</figcaption></figure>
+      <figure><img src="img/ai.png" alt="The AI tab"><figcaption>The AI tab. It works on the files of the open resource, or on a whole folder of scripts, under the NUI rules.</figcaption></figure>
+      <figure class="half"><img src="img/explorer.png" alt="The server explorer"><figcaption>Server: this machine on the left, the server on the right. Fetch, edit locally, send back; existing files ask before they are overwritten.</figcaption></figure>
+      <figure class="half"><img src="img/newscript.png" alt="The new script dialog"><figcaption>New script: pick a template, a framework and a name, and the folder is ready with locales, config and English comments.</figcaption></figure>
+    </section>
+
+    <section id="start">
+      <h2>Getting started</h2>
+      <ol class="steps">
+        <li><b>Install</b><p>Windows: run the installer, or unzip the portable build anywhere. Linux: make the AppImage executable and run it, or install the .deb. New versions are downloaded in the background and offered when ready.</p></li>
+        <li><b>The first run</b><p>A short setup asks for the app language and which AI you want to use. It looks for the installed command-line tools (Claude Code, Codex, Gemini, Ollama). Everything can be changed later under <kbd>⚙</kbd> (<kbd>Ctrl</kbd>+<kbd>,</kbd>).</p></li>
+        <li><b>Open a resource</b><p><em>Pick folder</em> and choose a resource folder (the one with <code>fxmanifest.lua</code>). Or choose a folder holding many scripts: they are listed under <em>Scripts</em> with the links between them, and the AI can work across them.</p></li>
+        <li><b>Show a scene</b><p>On the <em>Scenes</em> tab every message Lua can send is a button. <em>Show</em> sends it to the page. Open a scene to edit its data before sending. Lists the game fills at runtime are guessed from the script's config; a recorder resource can capture real data in game.</p></li>
+        <li><b>Edit</b><p><kbd>Ctrl</kbd>+<kbd>E</kbd> opens the editor next to the menu. Save with <kbd>Ctrl</kbd>+<kbd>S</kbd>; with <em>Live</em> on, CSS/HTML/JS save by themselves a moment after typing. The <em>Red test</em> paints the page background red so everything that would show the game through is visible.</p></li>
+        <li><b>Check</b><p>The <em>Check</em> tab runs the rules on the resource. Errors and warnings are things that break in game; notes are just notes. Click a finding to open the file at the line, or hand the list to the AI.</p></li>
+        <li><b>Let the AI work</b><p>On the <em>AI</em> tab describe the change. The AI gets the rules with every conversation, can see a screenshot of the menu, and asks before it does anything risky. The changes of a turn are listed with a diff and an <em>Undo</em> per file. <kbd>Ctrl</kbd>+<kbd>Tab</kbd> switches between the scripts it touched.</p></li>
+        <li><b>Send it to the server</b><p>Under <kbd>⚙</kbd> → <em>Server</em> add your servers: a local folder, SFTP or FTP, each with a name and a role (<span class="prod">production</span> or <span class="dev">dev</span>). <em>Deploy</em> (<kbd>Ctrl</kbd>+<kbd>D</kbd>) replaces the resource on the server and restarts it over RCON. <em>Server</em> opens the file explorer for everything else.</p></li>
+      </ol>
+      <div class="note">Something went wrong? <kbd>⚙</kbd> → <em>Updates</em> shows where the log file is; the last 200 lines are what a bug report needs. If the app crashed, a bar at the top offers to copy them.</div>
+    </section>
+
+    <section>
+      <h2>Keyboard</h2>
+      <table>
+        <tr><th><kbd>Ctrl</kbd>+<kbd>E</kbd></th><td>Open and close the editor</td></tr>
+        <tr><th><kbd>Ctrl</kbd>+<kbd>S</kbd></th><td>Save the file in the editor</td></tr>
+        <tr><th><kbd>Ctrl</kbd>+<kbd>D</kbd></th><td>Deploy the open resource</td></tr>
+        <tr><th><kbd>Ctrl</kbd>+<kbd>,</kbd></th><td>Settings</td></tr>
+        <tr><th><kbd>Ctrl</kbd>+<kbd>Tab</kbd></th><td>Switch between the scripts the AI touched (workspace)</td></tr>
+        <tr><th><kbd>Alt</kbd>+<kbd>Enter</kbd></th><td>Send the message on the AI tab</td></tr>
+        <tr><th><kbd>F1</kbd></th><td>This page</td></tr>
+        <tr><th><kbd>Esc</kbd></th><td>Close a dialog</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>The rules, in short</h2>
+      <p>The check and the AI follow one rule set, written from what actually went wrong in real scripts. The core of it:</p>
+      <div class="grid">
+        <div class="card"><b>Lua owns focus</b><p>Lua opens and closes the menu; Escape in the page sends <code>close</code> to Lua; <code>onResourceStop</code> releases focus.</p></div>
+        <div class="card"><b>No blocking dialogs</b><p>Never <code>alert</code>, <code>confirm</code> or <code>prompt</code>: they freeze the page in game. Build your own modal.</p></div>
+        <div class="card"><b>CSS that survives the game</b><p>No <code>backdrop-filter</code>, no transforms on hover, no custom scrollbars, backgrounds on a child element. Test with a red body.</p></div>
+        <div class="card"><b>Every callback answers</b><p>Every <code>RegisterNUICallback</code> calls <code>cb()</code> on every path, or the page hangs.</p></div>
+        <div class="card"><b>The server decides</b><p>Prices, access and validity are checked on the server, never trusted from the page.</p></div>
+        <div class="card"><b>Locales</b><p>Every text the player sees comes from locale files; comments in English.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ─────────────────────────────── Norsk ─────────────────────────────── -->
+  <div data-lang="no">
+    <div class="hero">
+      <img src="logo.png" alt="">
+      <h1>Asarayja NUI Tools</h1>
+      <p class="lead">Se, rediger og bygg FiveM-NUI-menyer utenfor spillet. Åpne en ressurs, se menyen slik spillet tegner den, fiks den live, sjekk den mot reglene og send den til serveren.</p>
+      <div class="dl">
+        <a class="primary" href="https://github.com/asarayja/asarayja-nui-tools-releases/releases/latest">Last ned – siste versjon</a>
+        <a href="#start">Kom i gang</a>
+        <a href="https://github.com/asarayja/asarayja-nui-tools-releases/issues">Meld en feil</a>
+        <small>Windows installer eller portabel · Linux AppImage eller .deb · appen oppdaterer seg selv etterpå.</small>
+      </div>
+    </div>
+
+    <section>
+      <h2>Hva det er</h2>
+      <p>En FiveM-NUI er en nettside som tegnes over spillet. Vanligvis ser du den bare i spillet: start serveren, koble til, åpne menyen, finn feilen, rediger, restart ressursen, gjenta. Asarayja NUI Tools viser den sida på skrivebordet i stedet. Den leser ressursens Lua, finner hver <code>SendNUIMessage</code>, gjetter dataene spillet ville sendt, svarer på sidas callbacks og lar deg redigere HTML, CSS og JS mens menyen står på skjermen.</p>
+      <p>Rundt det ligger alt som dukket opp underveis mens scriptene til en server ble laget: maler for nye script og telefonapper, en regelsjekk for feilene som bare vises på spillets gjennomsiktige flate, en AI-fane som jobber under de samme reglene, Git, og deploy eller en filutforsker mot serveren over SFTP eller FTP.</p>
+      <div class="grid">
+        <div class="card"><b>Scener</b><p>Hver melding Lua kan sende er en knapp. Klikk, og menyen viser den tilstanden, fylt med data gjettet fra scriptets egne config-tabeller.</p></div>
+        <div class="card"><b>Editor</b><p>CSS slår inn mens du skriver, HTML og JS ved pause. Filene som et mappetre, de sida faktisk laster merket med en prikk.</p></div>
+        <div class="card"><b>Sjekk</b><p>NUI-reglene sjekket av maskin: CSS som ryker i spillet, blokkerende dialoger, callbacks uten <code>cb()</code>, filer som mangler i manifestet, locale-filer som ikke stemmer.</p></div>
+        <div class="card"><b>AI</b><p>Claude Code, Codex, Gemini eller en lokal modell, alltid med reglene som fast instruks. Skjermbilde av menyen følger meldinga; hver endring kan angres per fil.</p></div>
+        <div class="card"><b>Maler</b><p>Nytt script fra mal: NUI-meny, inventar, klesmeny, loading screen, LB Phone-, NPWD- og oph3z-telefonapper. Locales på fem språk fra start.</p></div>
+        <div class="card"><b>Server</b><p>Deploy med én tast, eller bla på serveren som i FileZilla: hent en ressurs, rediger her, send tilbake. Produksjonsservere er merket rødt og spør først.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>En titt rundt</h2>
+      <figure><img src="img/main.png" alt="Hovedvinduet: panelet med scener til venstre, inventarmenyen til høyre"><figcaption>Panelet til venstre, menyen til høyre, tegnet akkurat som spillet gjør det. Hver scene er én melding fra Lua.</figcaption></figure>
+      <figure><img src="img/editor.png" alt="Editoren åpen ved siden av menyen"><figcaption>Editoren (<kbd>Ctrl</kbd>+<kbd>E</kbd>) ved siden av menyen. CSS-endringer vises med en gang.</figcaption></figure>
+      <figure><img src="img/check.png" alt="Sjekk-fanen"><figcaption>Sjekk: reglene kjørt på ressursen. Et funn åpner editoren på linja; AI-en kan bes om å fikse det.</figcaption></figure>
+      <figure><img src="img/ai.png" alt="AI-fanen"><figcaption>AI-fanen. Den jobber på filene i den åpne ressursen, eller på en hel mappe med script, under NUI-reglene.</figcaption></figure>
+      <figure class="half"><img src="img/explorer.png" alt="Serverutforskeren"><figcaption>Server: denne maskinen til venstre, serveren til høyre. Hent, rediger lokalt, send tilbake; filer som finnes fra før spør før de overskrives.</figcaption></figure>
+      <figure class="half"><img src="img/newscript.png" alt="Nytt script-dialogen"><figcaption>Nytt script: velg mal, rammeverk og navn, så står mappa klar med locales, config og engelske kommentarer.</figcaption></figure>
+    </section>
+
+    <section id="start-no">
+      <h2>Kom i gang</h2>
+      <ol class="steps">
+        <li><b>Installer</b><p>Windows: kjør installeren, eller pakk ut den portable versjonen hvor du vil. Linux: gjør AppImage-fila kjørbar og start den, eller installer .deb. Nye versjoner lastes ned i bakgrunnen og tilbys når de er klare.</p></li>
+        <li><b>Første gang</b><p>Et kort oppsett spør om språk i appen og hvilken AI du vil bruke. Det leter etter installerte kommandolinjeverktøy (Claude Code, Codex, Gemini, Ollama). Alt kan endres senere under <kbd>⚙</kbd> (<kbd>Ctrl</kbd>+<kbd>,</kbd>).</p></li>
+        <li><b>Åpne en ressurs</b><p><em>Velg mappe</em> og pek på en ressursmappe (den med <code>fxmanifest.lua</code>). Eller velg en mappe med mange script: de listes under <em>Script</em> med koblingene mellom seg, og AI-en kan jobbe på tvers av dem.</p></li>
+        <li><b>Vis en scene</b><p>På <em>Scener</em>-fanen er hver melding Lua kan sende en knapp. <em>Vis</em> sender den til sida. Åpne en scene for å redigere dataene før sending. Lister spillet fyller i sanntid gjettes fra scriptets config; en opptaker-ressurs kan fange ekte data i spillet.</p></li>
+        <li><b>Rediger</b><p><kbd>Ctrl</kbd>+<kbd>E</kbd> åpner editoren ved siden av menyen. Lagre med <kbd>Ctrl</kbd>+<kbd>S</kbd>; med <em>Live</em> på lagres CSS/HTML/JS av seg selv like etter at du har skrevet. <em>Rød test</em> maler sidebakgrunnen rød, så alt som ville vist spillet gjennom blir synlig.</p></li>
+        <li><b>Sjekk</b><p><em>Sjekk</em>-fanen kjører reglene på ressursen. Feil og advarsler er ting som ryker i spillet; notater er bare notater. Klikk et funn for å åpne fila på linja, eller gi lista til AI-en.</p></li>
+        <li><b>La AI-en jobbe</b><p>På <em>AI</em>-fanen beskriver du endringen. AI-en får reglene med hver samtale, kan se et skjermbilde av menyen og spør før den gjør noe risikabelt. Endringene fra en runde listes med diff og <em>Angre</em> per fil. <kbd>Ctrl</kbd>+<kbd>Tab</kbd> bytter mellom scriptene den har rørt.</p></li>
+        <li><b>Send til serveren</b><p>Under <kbd>⚙</kbd> → <em>Server</em> legger du inn serverne dine: lokal mappe, SFTP eller FTP, hver med navn og rolle (<span class="prod">produksjon</span> eller <span class="dev">dev</span>). <em>Deploy</em> (<kbd>Ctrl</kbd>+<kbd>D</kbd>) bytter ut ressursen på serveren og restarter den over RCON. <em>Server</em> åpner filutforskeren for alt annet.</p></li>
+      </ol>
+      <div class="note">Gikk noe galt? <kbd>⚙</kbd> → <em>Oppdateringer</em> viser hvor loggfila ligger; de siste 200 linjene er det en feilrapport trenger. Krasjet appen, tilbyr en stripe øverst å kopiere dem.</div>
+    </section>
+
+    <section>
+      <h2>Tastatur</h2>
+      <table>
+        <tr><th><kbd>Ctrl</kbd>+<kbd>E</kbd></th><td>Åpne og lukke editoren</td></tr>
+        <tr><th><kbd>Ctrl</kbd>+<kbd>S</kbd></th><td>Lagre fila i editoren</td></tr>
+        <tr><th><kbd>Ctrl</kbd>+<kbd>D</kbd></th><td>Deploy av den åpne ressursen</td></tr>
+        <tr><th><kbd>Ctrl</kbd>+<kbd>,</kbd></th><td>Innstillinger</td></tr>
+        <tr><th><kbd>Ctrl</kbd>+<kbd>Tab</kbd></th><td>Bytt mellom scriptene AI-en har rørt (mappe med mange script)</td></tr>
+        <tr><th><kbd>Alt</kbd>+<kbd>Enter</kbd></th><td>Send meldinga på AI-fanen</td></tr>
+        <tr><th><kbd>F1</kbd></th><td>Denne sida</td></tr>
+        <tr><th><kbd>Esc</kbd></th><td>Lukk en dialog</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Reglene, kort</h2>
+      <p>Sjekken og AI-en følger ett regelsett, skrevet ut fra det som faktisk har gått galt i ekte script. Kjernen:</p>
+      <div class="grid">
+        <div class="card"><b>Lua eier fokus</b><p>Lua åpner og lukker menyen; Escape i sida sender <code>close</code> til Lua; <code>onResourceStop</code> slipper fokus.</p></div>
+        <div class="card"><b>Ingen blokkerende dialoger</b><p>Aldri <code>alert</code>, <code>confirm</code> eller <code>prompt</code>: de fryser sida i spillet. Lag din egen modal.</p></div>
+        <div class="card"><b>CSS som overlever spillet</b><p>Ingen <code>backdrop-filter</code>, ingen transform ved hover, ingen egne scrollbarer, bakgrunn på et barn-element. Test med rød body.</p></div>
+        <div class="card"><b>Hver callback svarer</b><p>Hver <code>RegisterNUICallback</code> kaller <code>cb()</code> på alle veier ut, ellers henger sida.</p></div>
+        <div class="card"><b>Serveren bestemmer</b><p>Pris, tilgang og gyldighet sjekkes på serveren, aldri stolt på fra sida.</p></div>
+        <div class="card"><b>Locales</b><p>All tekst spilleren ser kommer fra locale-filer; kommentarer på engelsk.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <span data-lang="en">Asarayja NUI Tools · <a href="https://github.com/asarayja/asarayja-nui-tools-releases">Releases and issues on GitHub</a> · MIT licence.</span>
+    <span data-lang="no">Asarayja NUI Tools · <a href="https://github.com/asarayja/asarayja-nui-tools-releases">Utgivelser og feilmeldinger på GitHub</a> · MIT-lisens.</span>
+  </footer>
+</div>
+<script>
+  // The page in English or Norwegian: the choice is remembered, the first visit follows the browser.
+  const root = document.documentElement;
+  function setLang(l) { root.setAttribute('data-ui', l); root.lang = l === 'no' ? 'nb' : 'en'; try { localStorage.setItem('lang', l); } catch (e) { /* private mode */ } document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.set === l)); }
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.set)));
+  let start = 'en'; try { start = localStorage.getItem('lang') || (/^(nb|nn|no)/i.test(navigator.language) ? 'no' : 'en'); } catch (e) { /* private mode */ }
+  if (/[?&]lang=no/.test(location.search)) start = 'no'; if (/[?&]lang=en/.test(location.search)) start = 'en';
+  setLang(start);
+  // The anchor from the app ("#start") lands on the Norwegian steps too.
+  if (location.hash === '#start' && start === 'no') setTimeout(() => document.getElementById('start-no').scrollIntoView(), 50);
+</script>
+</body>
+</html>

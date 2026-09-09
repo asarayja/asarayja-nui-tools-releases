@@ -12,6 +12,8 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
 
 **Download:** [Releases](../../releases) – Linux AppImage / deb, Windows portable / installer.
 
+**Getting started, with pictures:** https://asarayja.github.io/asarayja-nui-tools-releases/ (English and Norwegian; the `?` button and F1 in the app open it).
+
 ## What it does
 
 - **Scenes** – every message Lua can send is a button. Lists that Lua fills at runtime are filled from
@@ -22,6 +24,12 @@ Claude Code, Codex or Gemini under a fixed rule set for NUI, a Git tab, and phon
   locale files that disagree, items without an image. A finding opens the editor at the line; the AI can be asked to fix.
 - **Deploy** (`Ctrl+D`) – copy the resource to the server and `ensure` it over RCON (⚙ → Server): a local folder, or a
   server over SFTP (password or private key) or FTP/FTPS.
+- **Server** – a file explorer against the SFTP/FTP servers (FileZilla-style): this machine on the left, the
+  server on the right, a folder tree above each list. Fetch a resource, edit it here, send it back (or "Send
+  <resource> here" for the open one); drag between the panes or drop files from the desktop. A file that exists
+  asks: overwrite, only if newer, skip, cancel, with "do the same with the rest". Nothing on the server is deleted.
+- **Several servers** under ⚙ → Server, each with a name and a role (production / dev). With nothing connected
+  the explorer asks which one; production is marked red and asks before anything is sent there, Deploy included.
 - **Screen** – show the page at 1366×768 … 5120×1440, scaled to fit, to check 21:9 and 32:9 layouts.
 - **AI extras** – a screenshot of the menu with the message, the last turn's changes with diff and Undo per file,
   recipes (proven prompts for the jobs that come up again and again), a first-time setup that finds the installed CLIs,
