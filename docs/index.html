@@ -148,7 +148,7 @@
         <div class="grid">
           <div class="card"><b data-t="c1.b">Scenes</b><p data-t="c1.p">Every message Lua can send is a button. Click it and the menu shows that state, filled with data guessed from the script's own config tables.</p></div>
           <div class="card"><b data-t="c2.b">Editor</b><p data-t="c2.p">CSS applies while you type, HTML and JS on pause. The files as a folder tree, the ones the page really loads marked with a dot.</p></div>
-          <div class="card"><b data-t="c3.b">Check</b><p data-t="c3.p">The NUI rules checked by machine: CSS that breaks in game, blocking dialogs, callbacks without <code>cb()</code>, files missing from the manifest, locale files that disagree.</p></div>
+          <div class="card"><b data-t="c3.b">Check</b><p data-t="c3.p">The NUI rules checked by machine: CSS that breaks in game, blocking dialogs, callbacks without <code>cb()</code>, files missing from the manifest, locale files that disagree. It reads the page and the Lua against each other, which is something only a tool with both halves open can do: a callback the Lua registers that the page never names is dead, because a NUI callback can only be reached by this resource’s own page. It finds a target registered inside an event handler – registered again every time that event fires, until the player sees the same option three times – and it now looks at loading screens, NPWD and oph3z apps, and where a player’s own settings are kept. And after the AI has worked, the list says what moved: what went away, what is still there, and – the half nobody would go looking for – what the change broke.</p></div>
           <div class="card"><b data-t="c4.b">AI</b><p data-t="c4.p">Claude Code, Codex, Gemini or a local model, always with the rules as its standing instruction. Screenshots of the menu go with the message; every change can be undone per file.</p></div>
           <div class="card"><b data-t="c5.b">Templates</b><p data-game="fivem" data-t="c5.p">New script from a template: NUI menu, tabbed app (MDT), HUD, DUI on a surface in the world, inventory, clothing menu, loading screen, LB Phone, NPWD and oph3z phone apps. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p><p data-game="redm" data-t="c5.p.redm">New script from a template: NUI menu, tabbed app (MDT), HUD, Node-built NUI, without NUI and loading screen, in a western look with a VORP and RSG bridge. Locales in eleven languages from the start (no, en, sv, da, de, fr, nl, es, pl, uk, ro).</p></div>
           <div class="card"><b data-t="c6.b">Server</b><p data-t="c6.p">Deploy with one key, or browse the server like FileZilla: fetch a resource, edit it here, send it back. Production servers are marked red and ask first. A folder fetched from a server remembers where it came from: Send the changes back lists what would change – which file, which lines – before a byte is written, keeps the old file as .bak, reads the new one back to prove it arrived, and can restart the resource over RCON in the same step. Nothing on the server is ever deleted.</p></div>
@@ -364,7 +364,7 @@ const S = {
   "c2.b": "Editor",
   "c2.p": "CSS slår inn mens du skriver, HTML og JS ved pause. Filene som et mappetre, de sida faktisk laster merket med en prikk.",
   "c3.b": "Sjekk",
-  "c3.p": "NUI-reglene sjekket av maskin: CSS som ryker i spillet, blokkerende dialoger, callbacks uten <code>cb()</code>, filer som mangler i manifestet, locale-filer som ikke stemmer.",
+  "c3.p": "NUI-reglene sjekket av maskin: CSS som ryker i spillet, blokkerende dialoger, callbacks uten <code>cb()</code>, filer som mangler i manifestet, locale-filer som ikke stemmer. Den leser sida og Lua-en opp mot hverandre, noe bare et verktøy med begge halvdelene åpne kan gjøre: et callback Lua-en registrerer og sida aldri nevner er dødt, for et NUI-callback kan bare nås av ressursens egen side. Den finner en target registrert inne i en event-handler – registrert på nytt hver gang eventet fyrer, til spilleren ser samme valg tre ganger – og den ser nå på loading screens, NPWD- og oph3z-apper, og hvor spillerens egne innstillinger havner. Og etter at AI-en har jobbet sier lista hva som flyttet seg: hva som forsvant, hva som står igjen, og – den halvdelen ingen ville lett etter – hva endringen ødela.",
   "c4.b": "AI",
   "c4.p": "Claude Code, Codex, Gemini eller en lokal modell, alltid med reglene som fast instruks. Skjermbilde av menyen følger meldinga; hver endring kan angres per fil.",
   "c5.b": "Maler",
@@ -510,7 +510,7 @@ const S = {
   "c2.b": "Editor",
   "c2.p": "CSS slår igenom medan du skriver, HTML och JS vid paus. Filerna som ett mappträd, de som sidan verkligen laddar märkta med en punkt.",
   "c3.b": "Kontroll",
-  "c3.p": "NUI-reglerna kontrollerade av maskin: CSS som går sönder i spelet, blockerande dialoger, callbacks utan <code>cb()</code>, filer som saknas i manifestet, locale-filer som inte stämmer.",
+  "c3.p": "NUI-reglerna kontrollerade av maskin: CSS som går sönder i spelet, blockerande dialoger, callbacks utan <code>cb()</code>, filer som saknas i manifestet, locale-filer som inte stämmer. Den läser sidan och Lua-koden mot varandra, något bara ett verktyg med båda halvorna öppna kan göra: ett callback som Lua registrerar och sidan aldrig nämner är dött, för ett NUI-callback kan bara nås av resursens egen sida. Den hittar en target registrerad inuti en event-hanterare – registrerad på nytt varje gång händelsen sker, tills spelaren ser samma val tre gånger – och den tittar nu på loading screens, NPWD- och oph3z-appar, och var spelarens egna inställningar hamnar. Och när AI:n har arbetat säger listan vad som ändrats: vad som försvann, vad som står kvar, och – den halva ingen skulle leta efter – vad ändringen förstörde.",
   "c4.b": "AI",
   "c4.p": "Claude Code, Codex, Gemini eller en lokal modell, alltid med reglerna som fast instruktion. Skärmbild av menyn följer meddelandet; varje ändring kan ångras per fil.",
   "c5.b": "Mallar",
@@ -656,7 +656,7 @@ const S = {
   "c2.b": "Editor",
   "c2.p": "CSS slår igennem mens du skriver, HTML og JS ved pause. Filerne som et mappetræ, dem siden faktisk henter markeret med en prik.",
   "c3.b": "Tjek",
-  "c3.p": "NUI-reglerne tjekket af maskine: CSS der går i stykker i spillet, blokerende dialoger, callbacks uden <code>cb()</code>, filer der mangler i manifestet, locale-filer der ikke passer sammen.",
+  "c3.p": "NUI-reglerne tjekket af maskine: CSS der går i stykker i spillet, blokerende dialoger, callbacks uden <code>cb()</code>, filer der mangler i manifestet, locale-filer der ikke passer sammen. Den læser siden og Lua-koden op mod hinanden, hvilket kun et værktøj med begge halvdele åbne kan: et callback, som Lua registrerer, og som siden aldrig nævner, er dødt, for et NUI-callback kan kun nås af ressourcens egen side. Den finder en target registreret inde i en event-handler – registreret igen hver gang begivenheden sker, indtil spilleren ser det samme valg tre gange – og den ser nu på loading screens, NPWD- og oph3z-apps, og hvor spillerens egne indstillinger havner. Og efter at AI’en har arbejdet, siger listen, hvad der flyttede sig: hvad der forsvandt, hvad der står tilbage, og – den halvdel ingen ville lede efter – hvad ændringen ødelagde.",
   "c4.b": "AI",
   "c4.p": "Claude Code, Codex, Gemini eller en lokal model, altid med reglerne som fast instruks. Skærmbillede af menuen følger beskeden; hver ændring kan fortrydes per fil.",
   "c5.b": "Skabeloner",
@@ -802,7 +802,7 @@ const S = {
   "c2.b": "Editor",
   "c2.p": "CSS wirkt beim Tippen, HTML und JS bei einer Pause. Die Dateien als Ordnerbaum, die von der Seite tatsächlich geladenen mit einem Punkt markiert.",
   "c3.b": "Prüfung",
-  "c3.p": "Die NUI-Regeln maschinell geprüft: CSS, das im Spiel bricht, blockierende Dialoge, Callbacks ohne <code>cb()</code>, fehlende Dateien im Manifest, Locale-Dateien, die nicht zusammenpassen.",
+  "c3.p": "Die NUI-Regeln maschinell geprüft: CSS, das im Spiel bricht, blockierende Dialoge, Callbacks ohne <code>cb()</code>, fehlende Dateien im Manifest, Locale-Dateien, die nicht zusammenpassen. Es liest die Seite und das Lua gegeneinander, was nur ein Werkzeug kann, das beide Hälften offen hat: ein Callback, das Lua registriert und die Seite nie nennt, ist tot, denn ein NUI-Callback ist nur von der eigenen Seite dieser Resource erreichbar. Es findet ein Target, das in einem Event-Handler registriert wird – bei jedem Auslösen erneut, bis der Spieler dieselbe Option dreimal sieht – und es sieht sich jetzt Ladebildschirme, NPWD- und oph3z-Apps an und wo die eigenen Einstellungen eines Spielers liegen. Und nachdem die KI gearbeitet hat, sagt die Liste, was sich bewegt hat: was weg ist, was noch dasteht und – die Hälfte, nach der niemand suchen würde – was die Änderung kaputtgemacht hat.",
   "c4.b": "KI",
   "c4.p": "Claude Code, Codex, Gemini oder ein lokales Modell, immer mit den Regeln als fester Anweisung. Ein Screenshot des Menüs geht mit der Nachricht mit; jede Änderung lässt sich pro Datei rückgängig machen.",
   "c5.b": "Vorlagen",
@@ -948,7 +948,7 @@ const S = {
   "c2.b": "Éditeur",
   "c2.p": "Le CSS s'applique pendant que vous tapez, le HTML et le JS à la pause. Les fichiers en arborescence, ceux que la page charge vraiment marqués d'un point.",
   "c3.b": "Vérification",
-  "c3.p": "Les règles NUI vérifiées par la machine : du CSS qui casse en jeu, des dialogues bloquants, des callbacks sans <code>cb()</code>, des fichiers absents du manifeste, des fichiers de langue qui ne concordent pas.",
+  "c3.p": "Les règles NUI vérifiées par la machine : du CSS qui casse en jeu, des dialogues bloquants, des callbacks sans <code>cb()</code>, des fichiers absents du manifeste, des fichiers de langue qui ne concordent pas. Il lit la page et le Lua l’un contre l’autre, ce que seul un outil ayant les deux moitiés ouvertes peut faire : un callback que le Lua enregistre et que la page ne nomme jamais est mort, car un callback NUI n’est joignable que par la page de cette ressource. Il trouve un target enregistré dans un gestionnaire d’événement – réenregistré à chaque déclenchement, jusqu’à ce que le joueur voie trois fois la même option – et il regarde désormais les écrans de chargement, les apps NPWD et oph3z, et où vont les réglages propres au joueur. Et une fois l’IA passée, la liste dit ce qui a bougé : ce qui a disparu, ce qui reste et – la moitié que personne n’irait chercher – ce que le changement a cassé.",
   "c4.b": "IA",
   "c4.p": "Claude Code, Codex, Gemini ou un modèle local, toujours avec les règles comme consigne permanente. Une capture du menu accompagne le message ; chaque changement s'annule fichier par fichier.",
   "c5.b": "Modèles",
@@ -1094,7 +1094,7 @@ const S = {
   "c2.b": "Editor",
   "c2.p": "CSS werkt terwijl je typt, HTML en JS bij een pauze. De bestanden als een mappenboom, die de pagina echt laadt met een stip gemarkeerd.",
   "c3.b": "Controle",
-  "c3.p": "De NUI-regels machinaal gecontroleerd: CSS die in het spel stukgaat, blokkerende dialogen, callbacks zonder <code>cb()</code>, bestanden die in het manifest ontbreken, taalbestanden die niet kloppen.",
+  "c3.p": "De NUI-regels machinaal gecontroleerd: CSS die in het spel stukgaat, blokkerende dialogen, callbacks zonder <code>cb()</code>, bestanden die in het manifest ontbreken, taalbestanden die niet kloppen. Het leest de pagina en de Lua tegen elkaar, iets wat alleen een gereedschap met beide helften open kan: een callback die de Lua registreert en die de pagina nooit noemt is dood, want een NUI-callback is alleen bereikbaar vanaf de eigen pagina van deze resource. Het vindt een target die binnen een event-handler geregistreerd wordt – elke keer opnieuw als dat event afgaat, tot de speler dezelfde optie drie keer ziet – en het kijkt nu naar laadschermen, NPWD- en oph3z-apps, en waar de eigen instellingen van een speler terechtkomen. En nadat de AI heeft gewerkt zegt de lijst wat er veranderd is: wat weg is, wat er nog staat en – de helft waar niemand naar zou zoeken – wat de wijziging kapot heeft gemaakt.",
   "c4.b": "AI",
   "c4.p": "Claude Code, Codex, Gemini of een lokaal model, altijd met de regels als vaste instructie. Een schermafbeelding van het menu gaat met het bericht mee; elke wijziging is per bestand ongedaan te maken.",
   "c5.b": "Sjablonen",
@@ -1240,7 +1240,7 @@ const S = {
   "c2.b": "Editor",
   "c2.p": "El CSS se aplica mientras escribes, el HTML y el JS en la pausa. Los archivos como un árbol de carpetas, los que la página carga de verdad marcados con un punto.",
   "c3.b": "Comprobación",
-  "c3.p": "Las reglas NUI comprobadas por máquina: CSS que se rompe en el juego, diálogos que bloquean, callbacks sin <code>cb()</code>, archivos que faltan en el manifiesto, archivos de idioma que no cuadran.",
+  "c3.p": "Las reglas NUI comprobadas por máquina: CSS que se rompe en el juego, diálogos que bloquean, callbacks sin <code>cb()</code>, archivos que faltan en el manifiesto, archivos de idioma que no cuadran. Lee la página y el Lua el uno contra el otro, algo que solo puede hacer una herramienta con ambas mitades abiertas: un callback que el Lua registra y que la página nunca nombra está muerto, porque a un callback NUI solo puede llegar la propia página de este recurso. Encuentra un target registrado dentro de un manejador de eventos – registrado de nuevo cada vez que ese evento se dispara, hasta que el jugador ve la misma opción tres veces – y ahora mira las pantallas de carga, las apps de NPWD y oph3z, y dónde acaban los ajustes propios del jugador. Y después de que la IA haya trabajado, la lista dice qué se movió: qué desapareció, qué sigue ahí y – la mitad que nadie iría a buscar – qué rompió el cambio.",
   "c4.b": "IA",
   "c4.p": "Claude Code, Codex, Gemini o un modelo local, siempre con las reglas como instrucción permanente. Una captura del menú acompaña al mensaje; cada cambio se deshace por archivo.",
   "c5.b": "Plantillas",
@@ -1386,7 +1386,7 @@ const S = {
   "c2.b": "Edytor",
   "c2.p": "CSS działa w trakcie pisania, HTML i JS przy przerwie. Pliki jako drzewo katalogów, te, które strona naprawdę ładuje, oznaczone kropką.",
   "c3.b": "Kontrola",
-  "c3.p": "Reguły NUI sprawdzone maszynowo: CSS, który psuje się w grze, blokujące okna dialogowe, callbacki bez <code>cb()</code>, pliki brakujące w manifeście, pliki językowe, które się nie zgadzają.",
+  "c3.p": "Reguły NUI sprawdzone maszynowo: CSS, który psuje się w grze, blokujące okna dialogowe, callbacki bez <code>cb()</code>, pliki brakujące w manifeście, pliki językowe, które się nie zgadzają. Czyta stronę i Lua nawzajem, czego może dokonać tylko narzędzie mające obie połowy otwarte: callback, który Lua rejestruje, a strona nigdy nie wymienia, jest martwy, bo do callbacku NUI może dotrzeć wyłącznie własna strona tego zasobu. Znajduje target zarejestrowany wewnątrz obsługi zdarzenia – rejestrowany od nowa przy każdym wywołaniu, aż gracz widzi tę samą opcję trzy razy – i patrzy teraz na ekrany ładowania, aplikacje NPWD i oph3z oraz na to, gdzie trafiają własne ustawienia gracza. A gdy AI skończy pracę, lista mówi, co się zmieniło: co zniknęło, co zostało i – ta połowa, której nikt by nie szukał – co zmiana popsuła.",
   "c4.b": "AI",
   "c4.p": "Claude Code, Codex, Gemini albo model lokalny, zawsze z regułami jako stałą instrukcją. Zrzut menu idzie razem z wiadomością; każdą zmianę można cofnąć osobno na plik.",
   "c5.b": "Szablony",
@@ -1532,7 +1532,7 @@ const S = {
   "c2.b": "Редактор",
   "c2.p": "CSS діє, поки ви друкуєте, HTML і JS — на паузі. Файли як дерево тек, ті, які сторінка справді завантажує, позначені крапкою.",
   "c3.b": "Перевірка",
-  "c3.p": "Правила NUI, перевірені машиною: CSS, що ламається в грі, блокувальні діалоги, колбеки без <code>cb()</code>, файли, яких бракує в маніфесті, мовні файли, що не збігаються.",
+  "c3.p": "Правила NUI, перевірені машиною: CSS, що ламається в грі, блокувальні діалоги, колбеки без <code>cb()</code>, файли, яких бракує в маніфесті, мовні файли, що не збігаються. Він читає сторінку і Lua одне проти одного — те, що може лише інструмент, у якого відкриті обидві половини: колбек, який Lua реєструє, а сторінка ніколи не називає, мертвий, бо до NUI-колбека може дістатися лише власна сторінка цього ресурсу. Він знаходить target, зареєстрований усередині обробника події — реєструється знову щоразу, коли подія спрацьовує, доки гравець не побачить той самий пункт тричі — і тепер дивиться на екрани завантаження, застосунки NPWD та oph3z і на те, де опиняються власні налаштування гравця. А після роботи ШІ список каже, що зрушилося: що зникло, що лишилося і — та половина, якої ніхто б не шукав — що зміна зламала.",
   "c4.b": "ШІ",
   "c4.p": "Claude Code, Codex, Gemini або локальна модель, завжди з правилами як сталою настановою. Знімок меню йде разом із повідомленням; кожну зміну можна скасувати окремо на файл.",
   "c5.b": "Шаблони",
@@ -1678,7 +1678,7 @@ const S = {
   "c2.b": "Editor",
   "c2.p": "CSS-ul se aplică în timp ce scrii, HTML și JS la pauză. Fișierele ca un arbore de dosare, cele pe care pagina chiar le încarcă marcate cu un punct.",
   "c3.b": "Verificare",
-  "c3.p": "Regulile NUI verificate automat: CSS care se rupe în joc, dialoguri care blochează, callback-uri fără <code>cb()</code>, fișiere care lipsesc din manifest, fișiere de limbă care nu se potrivesc.",
+  "c3.p": "Regulile NUI verificate automat: CSS care se rupe în joc, dialoguri care blochează, callback-uri fără <code>cb()</code>, fișiere care lipsesc din manifest, fișiere de limbă care nu se potrivesc. Citește pagina și Lua una față de cealaltă, ceva ce doar o unealtă cu ambele jumătăți deschise poate face: un callback pe care Lua îl înregistrează și pe care pagina nu îl numește niciodată este mort, fiindcă la un callback NUI poate ajunge doar pagina proprie a acestei resurse. Găsește un target înregistrat în interiorul unui handler de eveniment – înregistrat din nou de fiecare dată când evenimentul se declanșează, până când jucătorul vede aceeași opțiune de trei ori – și se uită acum la ecranele de încărcare, la aplicațiile NPWD și oph3z și la unde ajung setările proprii ale jucătorului. Iar după ce AI-ul a lucrat, lista spune ce s-a mișcat: ce a dispărut, ce a rămas și – jumătatea pe care nimeni nu ar căuta-o – ce a stricat schimbarea.",
   "c4.b": "IA",
   "c4.p": "Claude Code, Codex, Gemini sau un model local, mereu cu regulile ca instrucțiune permanentă. O captură a meniului însoțește mesajul; fiecare modificare se poate anula per fișier.",
   "c5.b": "Șabloane",
